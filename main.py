@@ -1,4 +1,4 @@
-from arrera-tk.arrera-tk import *
+from arrera_tk.arrera_tk import *
 
 def main():
     pass
