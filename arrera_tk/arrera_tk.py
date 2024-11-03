@@ -4,7 +4,10 @@ import customtkinter as ctk
 from tkinter import *
 
 class CArreraTK :
-    def __init__(self, mode:int=0, mainWindow:bool=True, width:int=800, height:int=600, title:str= "ArreraTK", resizable:bool=False,bg:str="",fg:str="",icon:str=""):
+    def __init__(self):
+        pass
+
+    def aTK(self, mode: int = 0, mainWindow: bool = True, width: int = 800, height: int = 600,title: str = "ArreraTK", resizable: bool = False, bg: str = "", fg: str = "", icon: str = ""):
         """
         :param mode: 1 for Tkinter, 0 for customtkinter
         :param mainWindow: True for main window, False for Toplevel
@@ -29,18 +32,18 @@ class CArreraTK :
         if mode == 0:
             if mainWindow:
                 self.__root = ctk.CTk()
-            else :
+            else:
                 self.__root = ctk.CTkToplevel()
         else:
             if mainWindow:
                 self.__root = Tk()
-            else :
+            else:
                 self.__root = Toplevel()
         if icon != "":
             self.__root.iconbitmap(icon)
         self.__root.geometry(f"{width}x{height}")
         self.__root.title(title)
-        self.__root.resizable(resizable,resizable)
+        self.__root.resizable(resizable, resizable)
         if bg == "":
             self.__root.configure(bg=defaultColor)
             self.__windowsColor = defaultColor
@@ -50,4 +53,21 @@ class CArreraTK :
             self.__windowsColor = bg
             self.__textColor = fg
 
+        return self.__root
+
+    def view(self):
         self.__root.mainloop()
+
+    def title(self, title: str):
+        self.__root.title(title)
+
+    def setGeometry(self, width: int, height: int):
+        self.__root.geometry(f"{width}x{height}")
+
+    def setResizable(self, resizable: bool):
+        self.__root.resizable(resizable, resizable)
+
+    def setColor(self, bg: str, fg: str):
+        self.__root.configure(bg=bg)
+        self.__windowsColor = bg
+        self.__textColor = fg
