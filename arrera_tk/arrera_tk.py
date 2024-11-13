@@ -5,7 +5,7 @@ from tkinter import *
 
 class CArreraTK :
     def __init__(self):
-        pass
+        self.__mode = 0
 
     def aTK(self, mode: int = 0, width: int = 800, height: int = 600,title: str = "ArreraTK", resizable: bool = False, bg: str = "", fg: str = "", icon: str = ""):
         """
@@ -17,7 +17,7 @@ class CArreraTK :
         :param resizable: True for resizable, False for not resizable
         :param bg:  background color
         :param fg:  text color
-        :param icon: icon of the window
+        :param icon: icon of the window (ico file)
         """
 
         ctk.set_appearance_mode("system")
@@ -29,6 +29,7 @@ class CArreraTK :
         else:
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
+        self.__mode = mode
         if mode == 0:
             self.__root = ctk.CTk()
         else:
@@ -59,7 +60,7 @@ class CArreraTK :
         :param resizable: True for resizable, False for not resizable
         :param bg:  background color
         :param fg:  text color
-        :param icon: icon of the window
+        :param icon: icon of the window (ico file)
         """
 
         ctk.set_appearance_mode("system")
@@ -71,6 +72,7 @@ class CArreraTK :
         else:
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
+        self.__mode = mode
         if mode == 0:
             self.__root = ctk.CTkToplevel()
         else:
