@@ -1,7 +1,6 @@
-from email.policy import default
-
 import customtkinter as ctk
 from tkinter import *
+from PIL import Image, ImageTk
 
 class CArreraTK :
     def __init__(self):
@@ -19,7 +18,6 @@ class CArreraTK :
         :param fg:  text color
         :param icon: icon of the window (ico file)
         """
-
         ctk.set_appearance_mode("system")
         ctk.set_default_color_theme("blue")
         ctheme = ctk.get_appearance_mode()
@@ -62,7 +60,6 @@ class CArreraTK :
         :param fg:  text color
         :param icon: icon of the window (ico file)
         """
-
         ctk.set_appearance_mode("system")
         ctk.set_default_color_theme("blue")
         ctheme = ctk.get_appearance_mode()
@@ -109,3 +106,26 @@ class CArreraTK :
         self.__root.configure(bg=bg)
         self.__windowsColor = bg
         self.__textColor = fg
+
+
+    def createImage(self, pathLight: str, pathDark: str = "", tailleX: int = 250, tailleY: int = 250):
+        if (self.__mode == 0):
+            if (pathDark != ""):
+                image = ctk.CTkImage(
+                    light_image=Image.open(pathLight),
+                    size=(tailleX, tailleY))
+                return image
+            else :
+                image = ctk.CTkImage(
+                    light_image=Image.open(pathLight),
+                    dark_image=Image.open(pathDark),
+                    size=(tailleX, tailleY))
+                return image
+        else :
+            if (pathDark != ""):
+                imageDark = PhotoImage(file=pathDark)
+                imageLight = PhotoImage(file=pathLight)
+                return [imageLight, imageDark]
+            else :
+                imageLight = PhotoImage(file=pathLight)
+                return imageLight
