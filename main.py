@@ -5,8 +5,8 @@ def main():
     screen = atk.aTK()
     atk.title("Super windows")
     atk.setColor("red", "white")
-    image = atk.createImage("/home/baptistep/Images/sable_desktop.PNG")
-    label = ctk.CTkLabel(screen,image=image).pack()
+    label = atk.createLabel(screen,"Je suis trop fort")
+    label.pack()
     atk.view()# This will create a Tkinter window with the title "Super windows" and resizable
     pass
 

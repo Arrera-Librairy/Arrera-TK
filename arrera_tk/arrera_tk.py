@@ -5,6 +5,8 @@ from PIL import Image, ImageTk
 class CArreraTK :
     def __init__(self):
         self.__mode = 0
+        self.__windowsColor = ""
+        self.__textColor = ""
 
     def aTK(self, mode: int = 0, width: int = 800, height: int = 600,title: str = "ArreraTK", resizable: bool = False, bg: str = "", fg: str = "", icon: str = ""):
         """
@@ -21,6 +23,7 @@ class CArreraTK :
         ctk.set_appearance_mode("system")
         ctk.set_default_color_theme("blue")
         ctheme = ctk.get_appearance_mode()
+        print(ctheme)
         if ctheme == "Dark":
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
@@ -129,3 +132,26 @@ class CArreraTK :
             else :
                 imageLight = PhotoImage(file=pathLight)
                 return imageLight
+
+    def createLabel(self, screen, text: str = "", image = None,bg : str = "", fg : str = ""):
+        if (self.__mode == 0):
+            label = ctk.CTkLabel(screen)
+            if (text != ""):
+                label.configure(text=text)
+            if (image != None):
+                label.configure(image=image)
+            if (bg != ""):
+                label.configure(bg_color=bg)
+            if (fg != ""):
+                label.configure(fg_color=fg)
+        else :
+            label = Label(screen)
+            if (text != ""):
+                label.configure(text=text)
+            if (image != None):
+                label.configure(image=image)
+            if (bg == ""):
+                label.configure(bg=bg)
+            if (fg == ""):
+                label.configure(fg=fg)
+        return label
