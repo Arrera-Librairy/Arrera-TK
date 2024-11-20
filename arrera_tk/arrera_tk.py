@@ -155,3 +155,30 @@ class CArreraTK :
             if (fg == ""):
                 label.configure(fg=fg)
         return label
+
+    def createButton(self, screen, text: str = "", image = None,bg : str = "", fg : str = "",command = None):
+        if (self.__mode == 0):
+            btn = (ctk.CTkButton(screen))
+            if (text != ""):
+                btn.configure(text=text)
+            if (image != None):
+                btn.configure(image=image)
+            if (bg != ""):
+                btn.configure(bg_color=bg)
+            if (fg != ""):
+                btn.configure(fg_color=fg)
+            if (command != None):
+                btn.configure(command=command)
+        else :
+            btn = Button(screen)
+            if (text != ""):
+                btn.configure(text=text)
+            if (image != None):
+                btn.configure(image=image)
+            if (bg == ""):
+                btn.configure(bg=bg)
+            if (fg == ""):
+                btn.configure(fg=fg)
+            if (command != None):
+                btn.configure(command=command)
+        return btn
