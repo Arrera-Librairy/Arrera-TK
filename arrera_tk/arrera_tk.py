@@ -108,23 +108,23 @@ class CArreraTK :
         self.__textColor = fg
 
 
-    def createImage(self, pathLight: str, pathDark: str = "", tailleX: int = 250, tailleY: int = 250):
+    def createImage(self, pathLight: str, pathDark: str = "none", tailleX: int = 250, tailleY: int = 250):
         if (self.__mode == 0):
-            if (pathDark != ""):
-                image = ctk.CTkImage(
-                    light_image=Image.open(pathLight),
-                    size=(tailleX, tailleY))
-                return image
-            else :
+            if (pathDark != "none"):
                 image = ctk.CTkImage(
                     light_image=Image.open(pathLight),
                     dark_image=Image.open(pathDark),
                     size=(tailleX, tailleY))
                 return image
+            else :
+                image = ctk.CTkImage(
+                    light_image=Image.open(pathLight),
+                    size=(tailleX, tailleY))
+                return image
         else :
-            if (pathDark != ""):
-                imageDark = PhotoImage(file=pathDark)
+            if (pathDark != "none"):
                 imageLight = PhotoImage(file=pathLight)
+                imageDark = PhotoImage(file=pathDark)
                 return [imageLight, imageDark]
             else :
                 imageLight = PhotoImage(file=pathLight)
