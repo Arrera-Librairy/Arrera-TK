@@ -182,3 +182,18 @@ class CArreraTK :
             if (command != None):
                 btn.configure(command=command)
         return btn
+
+    def createEntry(self, screen, bg : str = "", fg : str = ""):
+        if (self.__mode == 0):
+            entry = ctk.CTkEntry(screen)
+            if (bg != ""):
+                entry.configure(bg_color=bg)
+            if (fg != ""):
+                entry.configure(fg_color=fg)
+        else :
+            entry = Entry(screen)
+            if (bg == ""):
+                entry.configure(bg=bg)
+            if (fg == ""):
+                entry.configure(fg=fg)
+        return entry
