@@ -23,7 +23,6 @@ class CArreraTK :
         ctk.set_appearance_mode("system")
         ctk.set_default_color_theme("blue")
         ctheme = ctk.get_appearance_mode()
-        print(ctheme)
         if ctheme == "Dark":
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
