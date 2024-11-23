@@ -7,7 +7,11 @@ def test(input):
 
 def main():
     atk = CArreraTK()
-    screen = atk.aTK(1)
+    var = input("Enter 1 for Tkinter, 0 for customtkinter: ")
+    if var == "1":
+        screen = atk.aTK(1)
+    else:
+        screen = atk.aTK()
     atk.title("Super windows")
     atk.setColor("red", "white")
     label = atk.createLabel(screen,"Je suis trop fort")
