@@ -150,9 +150,9 @@ class CArreraTK :
                 label.configure(text=text)
             if (image != None):
                 label.configure(image=image)
-            if (bg == ""):
+            if (bg != ""):
                 label.configure(bg=bg)
-            if (fg == ""):
+            if (fg != ""):
                 label.configure(fg=fg)
         return label
 
@@ -175,9 +175,9 @@ class CArreraTK :
                 btn.configure(text=text)
             if (image != None):
                 btn.configure(image=image)
-            if (bg == ""):
+            if (bg != ""):
                 btn.configure(bg=bg)
-            if (fg == ""):
+            if (fg != ""):
                 btn.configure(fg=fg)
             if (command != None):
                 btn.configure(command=command)
@@ -192,8 +192,8 @@ class CArreraTK :
                 entry.configure(fg_color=fg)
         else :
             entry = Entry(screen)
-            if (bg == ""):
+            if (bg != ""):
                 entry.configure(bg=bg)
-            if (fg == ""):
+            if (fg != ""):
                 entry.configure(fg=fg)
         return entry
