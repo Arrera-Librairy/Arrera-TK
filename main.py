@@ -19,6 +19,8 @@ def main():
     btn = atk.createButton(screen,"Je suis un bouton",command=lambda: test("Je suis un bouton"))
     entry = atk.createEntry(screen)
     text = atk.createText(screen)
+    checkbox = atk.createCheckbox(screen,"Je suis une checkbox",bg="red",fg="white")
+    checkbox.pack()
     entry.pack()
     btn.pack()
     text.pack()

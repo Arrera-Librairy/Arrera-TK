@@ -205,3 +205,11 @@ class CArreraTK :
             text.configure(fg=fg)
 
         return text
+
+    def createCheckbox(self, screen, text: str = "", bg : str = "", fg : str = ""):
+        checkbox = Checkbutton(screen,text=text)
+        if (bg != ""):
+            checkbox.configure(bg=bg)
+        if (fg != ""):
+            checkbox.configure(fg=fg)
+        return checkbox
