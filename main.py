@@ -18,9 +18,12 @@ def main():
     label.pack()
     btn = atk.createButton(screen,"Je suis un bouton",command=lambda: test("Je suis un bouton"))
     entry = atk.createEntry(screen)
+    text = atk.createText(screen)
     entry.pack()
     btn.pack()
+    text.pack()
     atk.view()# This will create a Tkinter window with the title "Super windows" and resizable
+
     pass
 
 if __name__ == '__main__':

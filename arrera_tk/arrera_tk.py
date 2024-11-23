@@ -196,3 +196,12 @@ class CArreraTK :
             if (fg != ""):
                 entry.configure(fg=fg)
         return entry
+
+    def createText(self, screen, bg : str = "", fg : str = ""):
+        text = Text(screen)
+        if (bg != ""):
+            text.configure(bg=bg)
+        if (fg != ""):
+            text.configure(fg=fg)
+
+        return text
