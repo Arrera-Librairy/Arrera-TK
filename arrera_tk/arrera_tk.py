@@ -1,6 +1,9 @@
 import customtkinter as ctk
 from tkinter import *
 from PIL import Image, ImageTk
+import webbrowser as wb
+
+VERSIONARRERATK = "1.0.0"
 
 class CArreraTK :
     def __init__(self):
@@ -359,3 +362,29 @@ class CArreraTK :
                     widget.pack(expand="y",side="bottom")
                 else:
                     widget.pack(side="bottom")
+
+    def aproposWindows(self,nameSoft:str,iconFile:str,version:str,copyright:str,linkSource:str,linkWeb:str):
+        if (self.__mode == 0):
+            apropos = ctk.CTkToplevel()
+            apropos.title("A propos : "+nameSoft)
+            apropos.maxsize(400,300)
+            apropos.minsize(400,300)
+            icon = ctk.CTkImage(light_image=Image.open(iconFile),size=(100,100))
+            frameBTN = Frame(apropos,width=400,height=50)
+            labelIcon = ctk.CTkLabel(apropos,image=icon,text="")
+            labelSoft = ctk.CTkLabel(apropos,text=nameSoft+" version "+version,font=("Arial",20))
+            labelVersion = ctk.CTkLabel(apropos,text="Arrera TK version "+VERSIONARRERATK,font=("Arial",10))
+            labelCopy = ctk.CTkLabel(apropos,text=copyright)
+
+            btnLinkSource = ctk.CTkButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource))
+            btnLinkWeb = ctk.CTkButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb))
+
+            labelIcon.pack()
+            labelSoft.pack()
+            labelVersion.pack()
+
+            frameBTN.pack(side ="bottom")
+            labelCopy.pack(side ="bottom")
+
+            btnLinkSource.place(relx=1, rely=1, anchor='se')
+            btnLinkWeb.place(relx=0, rely=1, anchor='sw')
