@@ -213,3 +213,20 @@ class CArreraTK :
         if (fg != ""):
             checkbox.configure(fg=fg)
         return checkbox
+
+    def createRadioButton(self, screen, text: str = "", bg : str = "", fg : str = ""):
+        if (self.__mode == 0):
+            radio = ctk.CTkRadioButton(screen)
+            if (text != ""):
+                radio.configure(text=text)
+            if (bg != ""):
+                radio.configure(bg_color=bg)
+            if (fg != ""):
+                radio.configure(fg_color=fg)
+        else :
+            radio = Radiobutton(screen,text=text)
+            if (bg != ""):
+                radio.configure(bg=bg)
+            if (fg != ""):
+                radio.configure(fg=fg)
+        return radio
