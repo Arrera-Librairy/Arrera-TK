@@ -14,6 +14,7 @@ def main():
         screen = atk.aTK()
     atk.title("Super windows")
     atk.setColor("red", "white")
+    atk.setResizable(True)
     label = atk.createLabel(screen,"Je suis trop fort")
     label.pack()
     btn = atk.createButton(screen,"Je suis un bouton",command=lambda: test("Je suis un bouton"))
@@ -21,11 +22,15 @@ def main():
     text = atk.createText(screen)
     checkbox = atk.createCheckbox(screen,"Je suis une checkbox",bg="red",fg="white")
     redioBTN = atk.createRadioButton(screen,"Je suis un radio button")
+    canvas = atk.createCanvas(screen,width=50,height=50,bg="pink")
+    canvasImage = atk.createCanvas(screen,width=50,height=50,imageFile="image/test.png")
     checkbox.pack()
     entry.pack()
     btn.pack()
     text.pack()
     redioBTN.pack()
+    canvas.pack()
+    canvasImage.pack()
     atk.view()# This will create a Tkinter window with the title "Super windows" and resizable
 
     pass

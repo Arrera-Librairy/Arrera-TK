@@ -7,6 +7,7 @@ class CArreraTK :
         self.__mode = 0
         self.__windowsColor = ""
         self.__textColor = ""
+        self.__images = []
 
     def aTK(self, mode: int = 0, width: int = 800, height: int = 600,title: str = "ArreraTK", resizable: bool = False, bg: str = "", fg: str = "", icon: str = ""):
         """
@@ -230,3 +231,13 @@ class CArreraTK :
             if (fg != ""):
                 radio.configure(fg=fg)
         return radio
+
+    def createCanvas(self, screen, width: int, height: int, bg : str = "",imageFile : str = ""):
+        canvas = Canvas(screen, width=width, height=height)
+        if (bg != ""):
+            canvas.configure(bg=bg)
+        if (imageFile != ""):
+            photo = PhotoImage(file=imageFile,master=canvas)
+            canvas.image_names = photo
+            canvas.create_image(0, 0, image=photo, anchor="nw")
+        return canvas
