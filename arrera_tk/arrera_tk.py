@@ -33,6 +33,7 @@ class CArreraTK :
         self.__mode = mode
         if mode == 0:
             self.__root = ctk.CTk()
+            self.__root.configure(bg_color=defaultColor)
         else:
             self.__root = Tk()
         if icon != "":
@@ -241,3 +242,25 @@ class CArreraTK :
             canvas.image_names = photo
             canvas.create_image(0, 0, image=photo, anchor="nw")
         return canvas
+
+    def createFrame(self, screen,width : int = 0 ,height : int = 0,  bg : str = ""):
+        if (self.__mode == 0):
+            frame = ctk.CTkFrame(screen)
+            if (width != 0):
+                frame.configure(width=width)
+            if (height != 0):
+                frame.configure(height=height)
+            if (bg != ""):
+                frame.configure(bg_color=bg)
+            else:
+                frame.configure(bg_color=self.__windowsColor)
+            frame.update()
+        else :
+            frame = Frame(screen)
+            if (width != 0):
+                frame.configure(width=width)
+            if (height != 0):
+                frame.configure(height=height)
+            if (bg != ""):
+                frame.configure(bg=bg)
+        return frame
