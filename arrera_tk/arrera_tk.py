@@ -272,3 +272,90 @@ class CArreraTK :
             option = OptionMenu(screen,var,*value)
         var.set(value[0])
         return option
+
+    def placeLeftTop(self, widget):
+        widget.place(relx=0, rely=0, anchor='nw')
+
+    def placeRightTop(self, widget):
+        widget.place(relx=1, rely=0, anchor='ne')
+
+    def placeLeftBottom(self, widget):
+        widget.place(relx=0, rely=1, anchor='sw')
+
+    def placeRightBottom(self, widget):
+        widget.place(relx=1, rely=1, anchor='se')
+
+    def placeCenter(self, widget):
+        widget.place(relx=0.5, rely=0.5, anchor='center')
+
+    def placeLeftCenter(self, widget):
+        widget.place(relx=0, rely=0.5, anchor='w')
+
+    def placeRightCenter(self, widget):
+        widget.place(relx=1, rely=0.5, anchor='e')
+
+    def placeTopCenter(self, widget):
+        widget.place(relx=0.5, rely=0, anchor='n')
+
+    def placeBottomCenter(self, widget):
+        widget.place(relx=0.5, rely=1, anchor='s')
+
+    def pack(self, widget,xExpand : bool = False , yExpand : bool = False):
+        if (xExpand and yExpand):
+            widget.pack(expand="both")
+        else:
+            if (xExpand):
+                widget.pack(expand="x")
+            else:
+                if (yExpand):
+                    widget.pack(expand="y")
+                else:
+                    widget.pack()
+
+    def packLeft(self, widget,xExpand : bool = False , yExpand : bool = False):
+        if (xExpand and yExpand):
+            widget.pack(expand="both",side="left")
+        else:
+            if (xExpand):
+                widget.pack(expand="x",side="left")
+            else:
+                if (yExpand):
+                    widget.pack(expand="y",side="left")
+                else:
+                    widget.pack(side="left")
+
+    def packRight(self, widget,xExpand : bool = False , yExpand : bool = False):
+        if (xExpand and yExpand):
+            widget.pack(expand="both",side="right")
+        else:
+            if (xExpand):
+                widget.pack(expand="x",side="right")
+            else:
+                if (yExpand):
+                    widget.pack(expand="y",side="right")
+                else:
+                    widget.pack(side="right")
+
+    def packTop(self, widget,xExpand : bool = False , yExpand : bool = False):
+        if (xExpand and yExpand):
+            widget.pack(expand="both",side="top")
+        else:
+            if (xExpand):
+                widget.pack(expand="x",side="top")
+            else:
+                if (yExpand):
+                    widget.pack(expand="y",side="top")
+                else:
+                    widget.pack(side="top")
+
+    def packBottom(self, widget,xExpand : bool = False , yExpand : bool = False):
+        if (xExpand and yExpand):
+            widget.pack(expand="both",side="bottom")
+        else:
+            if (xExpand):
+                widget.pack(expand="x",side="bottom")
+            else:
+                if (yExpand):
+                    widget.pack(expand="y",side="bottom")
+                else:
+                    widget.pack(side="bottom")
