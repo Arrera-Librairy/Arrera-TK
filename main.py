@@ -6,12 +6,14 @@ def test(input):
     print(input)
 
 def main():
+    listValue = ["test1","test2","test3"]
     atk = CArreraTK()
     var = input("Enter 1 for Tkinter, 0 for customtkinter: ")
     if var == "1":
         screen = atk.aTK(1)
     else:
         screen = atk.aTK()
+    var = StringVar(screen)
     atk.title("Super windows")
     #atk.setColor("red", "white")
     atk.setResizable(True)
@@ -25,6 +27,7 @@ def main():
     canvas = atk.createCanvas(screen,width=50,height=50,bg="pink")
     canvasImage = atk.createCanvas(screen,width=50,height=50,imageFile="image/test.png")
     frame = atk.createFrame(screen)
+    optionMenu = atk.createOptionMenu(screen,listValue,var)
     checkbox.pack()
     entry.pack()
     btn.pack()
@@ -33,6 +36,7 @@ def main():
     canvas.pack()
     canvasImage.pack()
     frame.pack()
+    optionMenu.pack()
     atk.view()# This will create a Tkinter window with the title "Super windows" and resizable
 
     pass

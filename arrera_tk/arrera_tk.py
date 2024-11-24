@@ -264,3 +264,11 @@ class CArreraTK :
             if (bg != ""):
                 frame.configure(bg=bg)
         return frame
+
+    def createOptionMenu(self,screen,value: list, var:StringVar):
+        if (self.__mode == 0):
+            option = ctk.CTkOptionMenu(screen,variable=var,values=value)
+        else:
+            option = OptionMenu(screen,var,*value)
+        var.set(value[0])
+        return option
