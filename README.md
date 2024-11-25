@@ -14,5 +14,10 @@ Et enfin importer le module dans votre projet:
 from arrera_tk import *
 ```
 
+Et initiliser l'objet:
+```python
+app = CArreraTK()
+```
+
 ## Details des methode 
 

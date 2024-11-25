@@ -114,7 +114,6 @@ class CArreraTK :
         self.__windowsColor = bg
         self.__textColor = fg
 
-
     def createImage(self, pathLight: str, pathDark: str = "none", tailleX: int = 250, tailleY: int = 250):
         if (self.__mode == 0):
             if (pathDark != "none"):
