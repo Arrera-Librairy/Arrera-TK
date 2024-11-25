@@ -395,3 +395,40 @@ class CArreraTK :
 
             btnLinkSource.place(relx=1, rely=1, anchor='se')
             btnLinkWeb.place(relx=0, rely=1, anchor='sw')
+        else :
+            apropos = Toplevel()
+            apropos.title("A propos : " + nameSoft)
+            apropos.configure(bg=self.__windowsColor)
+            apropos.maxsize(400, 300)
+            apropos.minsize(400, 300)
+            icon = ctk.CTkImage(light_image=Image.open(iconFile), size=(100, 100))
+            mainFrame = Frame(apropos, width=400, height=250,bg=self.__windowsColor)
+            frameBTN = Frame(apropos, width=400, height=50,bg=self.__windowsColor)
+            frameLabel = Frame(apropos,bg=self.__windowsColor)
+
+            # Traitement Image
+            labelIcon = Label(mainFrame, bg=self.__windowsColor)
+            imageOrigine = Image.open(iconFile)
+            imageRedim = imageOrigine.resize((100,100))
+            icon = ImageTk.PhotoImage(imageRedim, master=labelIcon)
+            labelIcon.image_names = icon
+            labelIcon.configure(image=icon)
+
+            labelSoft = Label(frameLabel, text=nameSoft + " version " + version, font=("Arial", 20),bg=self.__windowsColor,fg=self.__textColor)
+            labelVersion = Label(frameLabel, text="Arrera TK version " + VERSIONARRERATK, font=("Arial", 13),bg=self.__windowsColor,fg=self.__textColor)
+            labelCopy = Label(mainFrame, text=copyright, font=("Arial", 13),bg=self.__windowsColor,fg=self.__textColor)
+
+            btnLinkSource = Button(frameBTN, text="Source code", command=lambda: wb.open(linkSource),bg=self.__windowsColor,fg=self.__textColor)
+            btnLinkWeb = Button(frameBTN, text="Web site", command=lambda: wb.open(linkWeb),bg=self.__windowsColor,fg=self.__textColor)
+
+            labelIcon.place(relx=0.5, rely=0.0, anchor="n")
+            labelSoft.pack()
+            labelVersion.pack()
+            labelCopy.place(relx=0.5, rely=1.0, anchor="s")
+
+            frameLabel.place(relx=0.5, rely=0.5, anchor="center")
+            mainFrame.pack(side="top")
+            frameBTN.pack(side="bottom")
+
+            btnLinkSource.place(relx=1, rely=1, anchor='se')
+            btnLinkWeb.place(relx=0, rely=1, anchor='sw')
