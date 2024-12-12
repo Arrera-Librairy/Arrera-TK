@@ -172,7 +172,7 @@ class CArreraTK :
                 label.configure(font=(police, taille))
         return label
 
-    def createButton(self, screen, text: str = "", image = None, bg : str = "", fg : str = "", command = None,police : str = "Arial", taille : int = 12):
+    def createButton(self, screen, text: str = "", image = None, bg : str = "", fg : str = "", command = None,police : str = "Arial", taille : int = 12,width : int = 0):
         if (self.__mode == 0):
             btn = (ctk.CTkButton(screen))
             if (text != ""):
@@ -187,6 +187,8 @@ class CArreraTK :
                 btn.configure(command=command)
             if (police != "Arial" or taille != 12):
                 btn.configure(font=(police,taille,"normal"))
+            if (width != 0):
+                btn.configure(width=width)
         else :
             btn = Button(screen)
             if (text != ""):
@@ -201,6 +203,8 @@ class CArreraTK :
                 btn.configure(command=command)
             if (police != "Arial" or taille != 12):
                 btn.configure(font=(police, taille))
+            if (width != 0):
+                btn.configure(width=width)
         return btn
 
     def createEntry(self, screen, bg : str = "", fg : str = "",placeholderText :str = "",police : str = "Arial", taille : int = 12,width : int = 20):
@@ -270,7 +274,7 @@ class CArreraTK :
             canvas.create_image(0, 0, image=photo, anchor="nw")
         return canvas
 
-    def createFrame(self, screen,width : int = 0 ,height : int = 0,  bg : str = ""):
+    def createFrame(self, screen,width : int = 0 ,height : int = 0,  bg : str = "",wightBoder : int = 0):
         if (self.__mode == 0):
             frame = ctk.CTkFrame(screen)
             if (width != 0):
@@ -281,6 +285,8 @@ class CArreraTK :
                 frame.configure(bg_color=bg)
             else:
                 frame.configure(bg_color=self.__windowsColor)
+            if (wightBoder != 0):
+                frame.configure(border_width=wightBoder)
             frame.update()
         else :
             frame = Frame(screen)
@@ -290,6 +296,8 @@ class CArreraTK :
                 frame.configure(height=height)
             if (bg != ""):
                 frame.configure(bg=bg)
+            if (wightBoder != 0):
+                frame.configure(borderwidth=wightBoder,relief="solid")
         return frame
 
     def createOptionMenu(self,screen,value: list, var:StringVar,taille : int = 0, police :str = "" ):
@@ -328,6 +336,18 @@ class CArreraTK :
 
     def placeBottomCenter(self, widget):
         widget.place(relx=0.5, rely=1, anchor='s')
+
+    def placeCenterOnWidth(self,widget,y :int = 0 ):
+        if (y==0):
+            return False
+        else :
+            widget.place(relx=0.5, y=y, anchor='n')
+
+    def placeBottomRight(self,widget):
+        widget.place(relx=1, rely=1, anchor='se')
+
+    def placeBottomLeft(self,widget):
+        widget.place(relx=0, rely=1, anchor='sw')
 
     def pack(self, widget,xExpand : bool = False , yExpand : bool = False):
         if (xExpand and yExpand):
