@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 import webbrowser as wb
 import platform
 import os
+from typing import Union
 
 VERSIONARRERATK = "1.0.0"
 
@@ -515,3 +516,15 @@ class CArreraTK :
 
             btnLinkSource.place(relx=1, rely=1, anchor='se')
             btnLinkWeb.place(relx=0, rely=1, anchor='sw')
+
+    def createTopMenu(self,master:Union[Tk,ctk.CTk, Toplevel, ctk.CTkToplevel,Menu]):
+        newMenu = Menu(master, tearoff=0, bg=self.__windowsColor, fg=self.__textColor)
+        if isinstance(master, (Tk, ctk.CTk, Toplevel, ctk.CTkToplevel)):
+            master.configure(menu=newMenu)
+        return newMenu
+
+    def addCommandTopMenu(self,menu:Menu,command,text:str):
+        menu.add_command(label=text,command=command)
+
+    def addCascadeTopMenu(self, menuMaster:Menu, menuChild:Menu, text:str):
+        menuMaster.add_cascade(label=text, menu=menuChild)
