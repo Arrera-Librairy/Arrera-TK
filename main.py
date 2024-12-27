@@ -45,6 +45,10 @@ def main():
         atk.packRight(entry)
         atk.packTop(optionMenu)
         atk.packBottom(checkbox)
+    imageFrame = atk.createArreraBackgroudImage(screen,"image/test.png","image/test-2.png",600,600)
+    atk.placeCenter(imageFrame)
+    labelTestImage = atk.createLabel(imageFrame,"Je suis un label",bg="pink")
+    atk.placeTopCenter(labelTestImage)
     atk.view()# This will create a Tkinter window with the title "Super windows" and resizable
 
     pass
