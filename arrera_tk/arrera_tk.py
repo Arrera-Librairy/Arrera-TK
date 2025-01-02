@@ -100,11 +100,11 @@ class CArreraTK :
         self.__root.title(title)
         self.__root.resizable(resizable, resizable)
         if bg == "":
-            self.__root.configure(bg=defaultColor)
+            self.__root.configure(fg_color=defaultColor)
             self.__windowsColor = defaultColor
             self.__textColor = defaultTextColor
         else:
-            self.__root.configure(bg=bg)
+            self.__root.configure(fg_color=bg)
             self.__windowsColor = bg
             self.__textColor = fg
 
