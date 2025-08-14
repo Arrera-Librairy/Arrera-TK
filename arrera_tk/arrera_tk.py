@@ -4,6 +4,8 @@ from PIL import Image, ImageTk
 import webbrowser as wb
 import platform
 import os
+import sys
+import platform
 from typing import Union
 
 VERSIONARRERATK = "1.0.0"
@@ -14,6 +16,15 @@ class CArreraTK :
         self.__windowsColor = ""
         self.__textColor = ""
         self.__images = []
+
+    # Methode pour gerer les asset sur mac os
+    def __resource_path(self,relative_path):
+        if platform.system() == "Darwin":
+            if hasattr(sys, '_MEIPASS'):
+                return os.path.join(sys._MEIPASS, relative_path)
+            return os.path.join(os.path.abspath("."), relative_path)
+        else:
+            return relative_path
 
     def aTK(self, mode: int = 0, width: int = 800, height: int = 600,title: str = "ArreraTK", resizable: bool = False, bg: str = "", fg: str = "", icon: str = ""):
         """
@@ -42,12 +53,12 @@ class CArreraTK :
             self.__root.configure(fg_color=defaultColor)
         else:
             self.__root = Tk()
+        icon = self.__resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
                 if os.path.splitext(icon)[1].lower() == '.ico' :
                     self.__root.iconbitmap(icon)
-            else:
-                if os.path.splitext(icon)[1].lower() == '.png' :
+            elif os.path.splitext(icon)[1].lower() == '.png' :
                     self.__root.iconphoto(True, PhotoImage(file=icon))
         self.__root.geometry(f"{width}x{height}")
         self.__root.title(title)
@@ -89,13 +100,13 @@ class CArreraTK :
             self.__root = ctk.CTkToplevel()
         else:
             self.__root = Toplevel()
+        icon = self.__resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
                 if os.path.splitext(icon)[1].lower() == '.ico':
                     self.__root.iconbitmap(icon)
-            else:
-                if os.path.splitext(icon)[1].lower() == '.png':
-                    self.__root.iconphoto(True, PhotoImage(file=icon))
+            elif os.path.splitext(icon)[1].lower() == '.png':
+                self.__root.iconphoto(True, PhotoImage(file=icon))
         self.__root.geometry(f"{width}x{height}")
         self.__root.title(title)
         self.__root.resizable(resizable, resizable)
@@ -143,7 +154,7 @@ class CArreraTK :
                 return image
         else :
             if (pathDark != "none"):
-                imageLight = PhotoImage(file=pathLight)
+                imageLight = PhotoImage(file=self.__resource_path(pathLight))
                 imageDark = PhotoImage(file=pathDark)
                 return [imageLight, imageDark]
             else :
@@ -200,7 +211,7 @@ class CArreraTK :
                 label.configure(font=(ppolice, ptaille))
         return label
 
-    def createButton(self, screen, text: str = "", image = None, bg : str = "", fg : str = "", command = None,ppolice : str = "Arial", ptaille : int = 12,pstyle :str = "normal",width : int = 0,height : int = 0,hoverbg:str="",conerRadus:int = 0):
+    def createButton(self, screen, text: str = "", image : Union[ctk.CTkImage, PhotoImage] = None, bg : str = "", fg : str = "", command = None,ppolice : str = "Arial", ptaille : int = 12,pstyle :str = "normal",width : int = 0,height : int = 0,hoverbg:str="",conerRadus:int = 0):
         if (self.__mode == 0):
             btn = (ctk.CTkButton(screen))
             if (text != ""):
@@ -293,8 +304,20 @@ class CArreraTK :
                 text.configure(width=width)
             if height != 0:
                 text.configure(height=height)
-            if (ppolice != "Arial" or ptaille != 12):
-                text.configure(font=(ppolice, ptaille, pstyle))
+
+            police = "Arial"
+            style = "normal"
+            taille = 12
+
+            if (ppolice != "Arial"):
+                police = ppolice
+            if (ptaille != 12):
+                taille = ptaille
+            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
+                style = pstyle
+
+            text.configure(fond=(police, taille, style))
+
             if center:
                 text._textbox.tag_configure("center", justify="center")
                 text._textbox.tag_add("center", "0.0", "end")
@@ -340,7 +363,7 @@ class CArreraTK :
         if (bg != ""):
             canvas.configure(bg=bg)
         if (imageFile != ""):
-            photo = PhotoImage(file=imageFile,master=canvas)
+            photo = PhotoImage(file=self.__resource_path(imageFile),master=canvas)
             canvas.image_names = photo
             canvas.create_image(0, 0, image=photo, anchor="nw")
         return canvas
@@ -527,7 +550,7 @@ class CArreraTK :
             apropos.title("A propos : "+nameSoft)
             apropos.maxsize(400,300)
             apropos.minsize(400,300)
-            icon = ctk.CTkImage(light_image=Image.open(iconFile),size=(100,100))
+            icon = ctk.CTkImage(light_image=Image.open(self.__resource_path(iconFile)),size=(100,100))
             mainFrame = ctk.CTkFrame(apropos,width=400,height=250,border_width=0,fg_color=self.__windowsColor)
             frameBTN = ctk.CTkFrame(apropos,width=400,height=50,border_width=0,fg_color=self.__windowsColor)
             frameLabel = ctk.CTkFrame(apropos,border_width=0,fg_color=self.__windowsColor)
@@ -605,11 +628,11 @@ class CArreraTK :
     def createArreraBackgroudImage(self,screen:Union[Tk,ctk.CTk,Toplevel,ctk.CTkToplevel],imageLight:str,imageDark :str = "",height:int = 600,width:int = 800):
         if (self.__mode == 0):
             if (imageDark != ""):
-                image = ctk.CTkImage(light_image=Image.open(imageLight),
-                                     dark_image=Image.open(imageDark),
+                image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight)),
+                                     dark_image=Image.open(self.__resource_path(imageDark)),
                                      size=(width, height))
             else :
-                image = ctk.CTkImage(light_image=Image.open(imageLight)
+                image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight))
                                      ,size=(width, height))
             frame = ctk.CTkFrame(screen,width=width,height=height,border_width=0)
             label = ctk.CTkLabel(frame,image=image,text="")
