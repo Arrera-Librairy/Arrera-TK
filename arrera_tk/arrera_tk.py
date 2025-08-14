@@ -271,6 +271,7 @@ class CArreraTK :
                 entry.configure(font=(ppolice, ptaille, "normal"))
             if (width != 20):
                 entry.configure(width=width)
+
         else :
             entry = Entry(screen)
             if (bg != ""):
@@ -281,14 +282,33 @@ class CArreraTK :
                 entry.configure(font=(ppolice, ptaille))
         return entry
 
-    def createText(self, screen, bg : str = "", fg : str = ""):
-        text = Text(screen)
-        if (bg != ""):
-            text.configure(bg=bg)
-        if (fg != ""):
-            text.configure(fg=fg)
+    def createText(self, screen,width : int = 0,height : int = 0, bg : str = "", fg : str = "",ppolice : str = "Arial", ptaille : int = 12,pstyle : str = "normal",center : bool = False):
+        if self.__mode == 0:
+            text = ctk.CTkTextbox(screen)
+            if bg != "":
+                text.configure(fg_color=bg)
+            if fg != "":
+                text.configure(text_color=fg)
+            if width != 0:
+                text.configure(width=width)
+            if height != 0:
+                text.configure(height=height)
+            if (ppolice != "Arial" or ptaille != 12):
+                text.configure(font=(ppolice, ptaille, pstyle))
+            if center:
+                text._textbox.tag_configure("center", justify="center")
+                text._textbox.tag_add("center", "0.0", "end")
+        else:
+            text = Text(screen)
+            if (bg != ""):
+                text.configure(bg=bg)
+            if (fg != ""):
+                text.configure(fg=fg)
 
         return text
+
+    def centerTextOnTextWidget(self,text : ctk.CTkTextbox):
+        text._textbox.tag_add("center", "1.0", "end")
 
     def createCheckbox(self, screen, text: str = "", bg : str = "", fg : str = ""):
         checkbox = Checkbutton(screen,text=text)
@@ -353,7 +373,7 @@ class CArreraTK :
                 frame.configure(borderwidth=wightBoder,relief="solid")
         return frame
 
-    def createOptionMenu(self,screen,value: list, var:StringVar,taille : int = 0, police :str = "" ):
+    def createOptionMenu(self,screen,value: list, var:StringVar,taille : int = 0, police :str = "",bg : str = "", fg : str = ""):
         if (self.__mode == 0):
             option = ctk.CTkOptionMenu(screen,variable=var,values=value)
         else:
@@ -361,6 +381,12 @@ class CArreraTK :
         if (police != "" and taille != 0):
             option.configure(font=(police,taille,"normal"))
         var.set(value[0])
+        if bg != "":
+            if self.__mode == 0:
+                option.configure(fg_color=bg)
+        if fg != "":
+            if self.__mode == 0:
+                option.configure(text_color=fg)
         return option
 
     def createEntryLegend(self,screen, bg : str = "", fg : str = "",text :str = "", ppolice : str = "Arial", ptaille : int = 12, width : int = 20):
