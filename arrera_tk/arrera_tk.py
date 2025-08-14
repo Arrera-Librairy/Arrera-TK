@@ -2,7 +2,6 @@ import customtkinter as ctk
 from tkinter import *
 from PIL import Image, ImageTk
 import webbrowser as wb
-import platform
 import os
 import sys
 import platform
