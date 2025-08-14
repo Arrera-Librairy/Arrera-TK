@@ -344,7 +344,7 @@ class CArreraTK :
             if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
                 style = pstyle
 
-            text.configure(fond=(police, taille, style))
+            text.configure(font=(police, taille, style))
 
             if center:
                 text._textbox.tag_configure("center", justify="center")
@@ -670,7 +670,7 @@ class CArreraTK :
 
      # Fenetre A propos concu pour les application d'Arrera Software (PEUX ETRE REPRIS POUR D'AUTRES ORGANISATIONS)
 
-    def aproposWindows(self,nameSoft:str,iconFile:str,version:str,copyright:str,linkSource:str,linkWeb:str):
+    def aproposWindows(self,nameSoft:str,iconFile:str,version:str,copyright:str,linkSource:str,linkWeb:str,color_btn:str = "blue",color_btn_hover:str = "lightblue"):
         """
         :param nameSoft: Name of the software
         :param iconFile: Icon of the software (ico or png file)
@@ -697,8 +697,10 @@ class CArreraTK :
             labelVersion = ctk.CTkLabel(frameLabel,text="Arrera TK version "+VERSIONARRERATK,font=("Arial",13),fg_color=self.__windowsColor)
             labelCopy = ctk.CTkLabel(mainFrame,text=copyright,font=("Arial",13),fg_color=self.__windowsColor)
 
-            btnLinkSource = ctk.CTkButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource))
-            btnLinkWeb = ctk.CTkButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb))
+            btnLinkSource = ctk.CTkButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource),
+                                          font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
+            btnLinkWeb = ctk.CTkButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb),
+                                       font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
 
             labelIcon.place(relx=0.5, rely=0.0, anchor="n")
             labelSoft.pack()
