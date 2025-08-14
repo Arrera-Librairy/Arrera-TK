@@ -7,7 +7,7 @@ import sys
 import platform
 from typing import Union
 
-VERSIONARRERATK = "1.0.0"
+VERSIONARRERATK = "1.5.0"
 
 class CArreraTK :
     def __init__(self):
