@@ -19,7 +19,7 @@ def main():
     atk.setResizable(False)
     label = atk.createLabel(screen,"Je suis trop fort")
 
-    btn = atk.createButton(screen,"Je suis un bouton",command=lambda: atk.aproposWindows("Arrera TK", "image/test.png", "1.0", "Baptiste P","www.google.com","www.bing.com"))
+    btn = atk.createButton(screen,"Je suis un bouton",command=lambda: atk.aproposWindows("Arrera TK", "image/test.png", "1.0", "Baptiste P","www.google.com","www.bing.com",color_btn="red",color_btn_hover="pink"))
     entry = atk.createEntry(screen)
     text = atk.createText(screen)
     checkbox = atk.createCheckbox(screen,"Je suis une checkbox",bg="red",fg="white")
