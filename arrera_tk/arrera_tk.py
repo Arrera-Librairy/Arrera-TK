@@ -12,7 +12,6 @@ VERSIONARRERATK = "1.5.0"
 
 class CArreraTK :
     def __init__(self):
-        self.__mode = 0
         self.__windowsColor = ""
         self.__textColor = ""
         self.__images = []
@@ -49,12 +48,8 @@ class CArreraTK :
         else:
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
-        self.__mode = mode
-        if mode == 0:
-            self.__root = ctk.CTk()
-            self.__root.configure(fg_color=defaultColor)
-        else:
-            self.__root = Tk()
+        self.__root = ctk.CTk()
+        self.__root.configure(fg_color=defaultColor)
         icon = self.__resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
@@ -97,11 +92,7 @@ class CArreraTK :
         else:
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
-        self.__mode = mode
-        if mode == 0:
-            self.__root = ctk.CTkToplevel()
-        else:
-            self.__root = Toplevel()
+        self.__root = ctk.CTkToplevel()
         icon = self.__resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
@@ -167,230 +158,151 @@ class CArreraTK :
         :param tailleY: Height of the image
         :return: CTkImage or PhotoImage object
         """
-        if (self.__mode == 0):
-            if (pathDark != "none"):
-                image = ctk.CTkImage(
-                    light_image=Image.open(self.__resource_path(pathLight)),
-                    dark_image=Image.open(self.__resource_path(pathDark)),
-                    size=(tailleX, tailleY))
-                return image
-            else :
-                image = ctk.CTkImage(
-                    light_image=Image.open(pathLight),
-                    size=(tailleX, tailleY))
-                return image
+        if (pathDark != "none"):
+            image = ctk.CTkImage(
+                light_image=Image.open(self.__resource_path(pathLight)),
+                dark_image=Image.open(self.__resource_path(pathDark)),
+                size=(tailleX, tailleY))
+            return image
         else :
-            if (pathDark != "none"):
-                imageLight = PhotoImage(file=self.__resource_path(pathLight))
-                imageDark = PhotoImage(file=self.__resource_path(pathDark))
-                return [imageLight, imageDark]
-            else :
-                imageLight = PhotoImage(file=self.__resource_path(pathLight))
-                return imageLight
+            image = ctk.CTkImage(
+                light_image=Image.open(pathLight),
+                size=(tailleX, tailleY))
+            return image
 
     # Methode pour creer les widgets
 
     def createLabel(self, screen, text: str = "", image : Union[ctk.CTkImage, PhotoImage] = None, bg : str = "", fg : str = "", ppolice : str = "Arial", ptaille : int = 12,pstyle : str = "normal",width : int = 0,height : int = 0,pwraplength : int = 0,justify : str = "center"):
-        if (self.__mode == 0):
-            label = ctk.CTkLabel(screen)
-            if (text != ""):
-                label.configure(text=text)
-            if (image != None):
-                label.configure(image=image)
-                label.configure(text="")
-            if (fg != ""):
-                label.configure(text_color=fg)
-            if (bg != ""):
-                label.configure(fg_color=bg)
-            if (width != 0):
-                label.configure(width=width)
-            if (height != 0):
-                label.configure(height=height)
-            if (pwraplength != 0):
-                label.configure(wraplength=pwraplength)
-            police = "Arial"
-            style = "normal"
-            taille = 12
-            if (ppolice != "Arial"):
-                police = ppolice
-            if (ptaille != 12):
-                taille = ptaille
-            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
-                style = pstyle
-            if (image != None):
-                label.configure(image=image)
-            label.configure(font=(police, taille, style),justify=justify)
-        else :
-            label = Label(screen)
-            if (text != ""):
-                label.configure(text=text)
-            if (image != None):
-                label.configure(image=image)
-            if (bg != ""):
-                label.configure(bg=bg)
-            if (fg != ""):
-                label.configure(fg=fg)
-            if (width != 0):
-                label.configure(width=width)
-            if (height != 0):
-                label.configure(height=height)
-            if (pwraplength != 0):
-                label.configure(wraplength=pwraplength)
-            if (ppolice != "Arial" or ptaille != 12):
-                label.configure(font=(ppolice, ptaille))
+        label = ctk.CTkLabel(screen)
+        if (text != ""):
+            label.configure(text=text)
+        if (image != None):
+            label.configure(image=image)
+            label.configure(text="")
+        if (fg != ""):
+            label.configure(text_color=fg)
+        if (bg != ""):
+            label.configure(fg_color=bg)
+        if (width != 0):
+            label.configure(width=width)
+        if (height != 0):
+            label.configure(height=height)
+        if (pwraplength != 0):
+            label.configure(wraplength=pwraplength)
+        police = "Arial"
+        style = "normal"
+        taille = 12
+        if (ppolice != "Arial"):
+            police = ppolice
+        if (ptaille != 12):
+            taille = ptaille
+        if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
+            style = pstyle
+        if (image != None):
+            label.configure(image=image)
+        label.configure(font=(police, taille, style),justify=justify)
         return label
 
     def createButton(self, screen, text: str = "", image : Union[ctk.CTkImage, PhotoImage] = None, bg : str = "", fg : str = "", command = None,ppolice : str = "Arial", ptaille : int = 12,pstyle :str = "normal",width : int = 0,height : int = 0,hoverbg:str="",conerRadus:int = 0):
-        if (self.__mode == 0):
-            btn = (ctk.CTkButton(screen))
-            if (text != ""):
-                btn.configure(text=text)
-            else :
-                btn.configure(text="")
-            if (image != None):
-                btn.configure(image=image)
-                btn.configure(text="")
-            if (fg != ""):
-                btn.configure(text_color=fg)
-            if (bg != ""):
-                btn.configure(fg_color=bg)
-            if (hoverbg != ""):
-                btn.configure(hover_color=hoverbg)
-            if (command != None):
-                btn.configure(command=command)
-            if (width != 0):
-                btn.configure(width=width)
-            if (height != 0):
-                btn.configure(height=height)
-            if conerRadus != 0:
-                btn.configure(corner_radius=conerRadus)
-            police = "Arial"
-            style = "normal"
-            taille = 12
-            if (ppolice != "Arial"):
-                police = ppolice
-            if (ptaille != 12):
-                taille = ptaille
-            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
-                style = pstyle
-
-            btn.configure(font=(police,taille,style))
-
+        btn = (ctk.CTkButton(screen))
+        if (text != ""):
+            btn.configure(text=text)
         else :
-            btn = Button(screen)
-            if (text != ""):
-                btn.configure(text=text)
-            else :
-                btn.configure(text="")
-            if (image != None):
-                btn.configure(image=image)
-            if (bg != ""):
-                btn.configure(bg=bg)
-            if (fg != ""):
-                btn.configure(fg=fg)
-            if (command != None):
-                btn.configure(command=command)
-            if (ppolice != "Arial" or ptaille != 12):
-                btn.configure(font=(ppolice, ptaille))
-            if (width != 0):
-                btn.configure(width=width)
-            if (height != 0):
-                btn.configure(height=height)
-        return btn
+            btn.configure(text="")
+        if (image != None):
+            btn.configure(image=image)
+            btn.configure(text="")
+        if (fg != ""):
+            btn.configure(text_color=fg)
+        if (bg != ""):
+            btn.configure(fg_color=bg)
+        if (hoverbg != ""):
+            btn.configure(hover_color=hoverbg)
+        if (command != None):
+            btn.configure(command=command)
+        if (width != 0):
+            btn.configure(width=width)
+        if (height != 0):
+            btn.configure(height=height)
+        if conerRadus != 0:
+            btn.configure(corner_radius=conerRadus)
+        police = "Arial"
+        style = "normal"
+        taille = 12
+        if (ppolice != "Arial"):
+            police = ppolice
+        if (ptaille != 12):
+            taille = ptaille
+        if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
+            style = pstyle
+
+        btn.configure(font=(police,taille,style))
 
     def createEntry(self, screen, bg : str = "", fg : str = "", placeholderText :str = "", ppolice : str = "Arial", ptaille : int = 12, width : int = 20):
-        if (self.__mode == 0):
-            entry = ctk.CTkEntry(screen)
-            if (fg != ""):
-                entry.configure(text_color=fg)
-            if (bg != ""):
-                entry.configure(fg_color=bg)
-            if (placeholderText != ""):
-                entry.configure(placeholder_text=placeholderText)
-            if (ppolice != "Arial" or ptaille != 12):
-                entry.configure(font=(ppolice, ptaille, "normal"))
-            if (width != 20):
-                entry.configure(width=width)
+        entry = ctk.CTkEntry(screen)
+        if (fg != ""):
+            entry.configure(text_color=fg)
+        if (bg != ""):
+            entry.configure(fg_color=bg)
+        if (placeholderText != ""):
+            entry.configure(placeholder_text=placeholderText)
+        if (ppolice != "Arial" or ptaille != 12):
+            entry.configure(font=(ppolice, ptaille, "normal"))
+        if (width != 20):
+            entry.configure(width=width)
 
-        else :
-            entry = Entry(screen)
-            if (bg != ""):
-                entry.configure(bg=bg)
-            if (fg != ""):
-                entry.configure(fg=fg)
-            if (ppolice != "Arial" or ptaille != 12):
-                entry.configure(font=(ppolice, ptaille))
         return entry
 
     def createText(self, screen,width : int = 0,height : int = 0, bg : str = "", fg : str = "",ppolice : str = "Arial", ptaille : int = 12,pstyle : str = "normal",center : bool = False):
-        if self.__mode == 0:
-            text = ctk.CTkTextbox(screen)
-            if bg != "":
-                text.configure(fg_color=bg)
-            if fg != "":
-                text.configure(text_color=fg)
-            if width != 0:
-                text.configure(width=width)
-            if height != 0:
-                text.configure(height=height)
+        text = ctk.CTkTextbox(screen)
+        if bg != "":
+            text.configure(fg_color=bg)
+        if fg != "":
+            text.configure(text_color=fg)
+        if width != 0:
+            text.configure(width=width)
+        if height != 0:
+            text.configure(height=height)
 
-            police = "Arial"
-            style = "normal"
-            taille = 12
+        police = "Arial"
+        style = "normal"
+        taille = 12
 
-            if (ppolice != "Arial"):
-                police = ppolice
-            if (ptaille != 12):
-                taille = ptaille
-            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
-                style = pstyle
+        if (ppolice != "Arial"):
+            police = ppolice
+        if (ptaille != 12):
+            taille = ptaille
+        if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
+            style = pstyle
 
-            text.configure(font=(police, taille, style))
+        text.configure(font=(police, taille, style))
 
-            if center:
-                text._textbox.tag_configure("center", justify="center")
-                text._textbox.tag_add("center", "0.0", "end")
-        else:
-            text = Text(screen)
-            if (bg != ""):
-                text.configure(bg=bg)
-            if (fg != ""):
-                text.configure(fg=fg)
+        if center:
+            text._textbox.tag_configure("center", justify="center")
+            text._textbox.tag_add("center", "0.0", "end")
 
         return text
 
     def createCheckbox(self, screen,var_chk : BooleanVar, text: str = "", bg : str = "", fg : str = "",command = None):
-        if (self.__mode == 0):
-            checkbox = ctk.CTkCheckBox(screen, text=text, variable=var_chk)
-            if (bg != ""):
-                checkbox.configure(bg=bg)
-            if (fg != ""):
-                checkbox.configure(fg=fg)
-            if command is not None:
-                checkbox.configure(command=command)
-        else :
-            checkbox = Checkbutton(screen,text=text,variable=var_chk)
-            if (bg != ""):
-                checkbox.configure(bg=bg)
-            if (fg != ""):
-                checkbox.configure(fg=fg)
+        checkbox = ctk.CTkCheckBox(screen, text=text, variable=var_chk)
+        if (bg != ""):
+            checkbox.configure(bg=bg)
+        if (fg != ""):
+            checkbox.configure(fg=fg)
+        if command is not None:
+            checkbox.configure(command=command)
+
         return checkbox
 
     def createRadioButton(self, screen, text: str = "", bg : str = "", fg : str = ""):
-        if (self.__mode == 0):
-            radio = ctk.CTkRadioButton(screen)
-            if (text != ""):
-                radio.configure(text=text)
-            if (bg != ""):
-                radio.configure(bg_color=bg)
-            if (fg != ""):
-                radio.configure(fg_color=fg)
-        else :
-            radio = Radiobutton(screen,text=text)
-            if (bg != ""):
-                radio.configure(bg=bg)
-            if (fg != ""):
-                radio.configure(fg=fg)
+        radio = ctk.CTkRadioButton(screen)
+        if (text != ""):
+            radio.configure(text=text)
+        if (bg != ""):
+            radio.configure(bg_color=bg)
+        if (fg != ""):
+            radio.configure(fg_color=fg)
+
         return radio
 
     def createCanvas(self, screen, width: int, height: int, bg : str = "",imageFile : str = ""):
@@ -404,75 +316,52 @@ class CArreraTK :
         return canvas
 
     def createFrame(self, screen,width : int = 0 ,height : int = 0,  bg : str = "",wightBoder : int = 0,corner_radius : int = 1024):
-        if (self.__mode == 0):
-            frame = ctk.CTkFrame(screen)
-            if (width != 0):
-                frame.configure(width=width)
-            if (height != 0):
-                frame.configure(height=height)
-            if (bg != ""):
-                frame.configure(fg_color=bg)
-            else:
-                frame.configure(fg_color=self.__windowsColor)
-            if (wightBoder != 0):
-                frame.configure(border_width=wightBoder)
-            if (corner_radius != 1024):
-                frame.configure(corner_radius=corner_radius)
-            frame.update()
-        else :
-            frame = Frame(screen)
-            if (width != 0):
-                frame.configure(width=width)
-            if (height != 0):
-                frame.configure(height=height)
-            if (bg != ""):
-                frame.configure(bg=bg)
-            if (wightBoder != 0):
-                frame.configure(borderwidth=wightBoder,relief="solid")
+        frame = ctk.CTkFrame(screen)
+        if (width != 0):
+            frame.configure(width=width)
+        if (height != 0):
+            frame.configure(height=height)
+        if (bg != ""):
+            frame.configure(fg_color=bg)
+        else:
+            frame.configure(fg_color=self.__windowsColor)
+        if (wightBoder != 0):
+            frame.configure(border_width=wightBoder)
+        if (corner_radius != 1024):
+            frame.configure(corner_radius=corner_radius)
+        frame.update()
+
         return frame
 
     def createScrollFrame(self, screen,width : int = 0 ,height : int = 0,  bg : str = "",wightBoder : int = 0,corner_radius : int = 1024):
-        if (self.__mode == 0):
-            frame = ctk.CTkScrollableFrame(screen)
-            if (width != 0):
-                frame.configure(width=width)
-            if (height != 0):
-                frame.configure(height=height)
-            if (bg != ""):
-                frame.configure(fg_color=bg)
-            else:
-                frame.configure(fg_color=self.__windowsColor)
-            if (wightBoder != 0):
-                frame.configure(border_width=wightBoder)
-            if (corner_radius != 1024):
-                frame.configure(corner_radius=corner_radius)
-            frame.update()
-        else :
-            frame = Frame(screen)
-            if (width != 0):
-                frame.configure(width=width)
-            if (height != 0):
-                frame.configure(height=height)
-            if (bg != ""):
-                frame.configure(bg=bg)
-            if (wightBoder != 0):
-                frame.configure(borderwidth=wightBoder,relief="solid")
+        frame = ctk.CTkScrollableFrame(screen)
+        if (width != 0):
+            frame.configure(width=width)
+        if (height != 0):
+            frame.configure(height=height)
+        if (bg != ""):
+            frame.configure(fg_color=bg)
+        else:
+            frame.configure(fg_color=self.__windowsColor)
+        if (wightBoder != 0):
+            frame.configure(border_width=wightBoder)
+        if (corner_radius != 1024):
+            frame.configure(corner_radius=corner_radius)
+        frame.update()
+
         return frame
 
     def createOptionMenu(self,screen,value: list, var:StringVar,taille : int = 0, police :str = "",bg : str = "", fg : str = ""):
-        if (self.__mode == 0):
-            option = ctk.CTkOptionMenu(screen,variable=var,values=value)
-        else:
-            option = OptionMenu(screen,var,*value)
+        option = ctk.CTkOptionMenu(screen,variable=var,values=value)
+
         if (police != "" and taille != 0):
             option.configure(font=(police,taille,"normal"))
         var.set(value[0])
         if bg != "":
-            if self.__mode == 0:
-                option.configure(fg_color=bg)
+            option.configure(fg_color=bg)
+
         if fg != "":
-            if self.__mode == 0:
-                option.configure(text_color=fg)
+            option.configure(text_color=fg)
         return option
 
     def createEntryLegend(self,screen, bg : str = "", fg : str = "",text :str = "", ppolice : str = "Arial", ptaille : int = 12, width : int = 20,gridUsed: bool = False):
@@ -491,53 +380,28 @@ class CArreraTK :
         return widget,entry
 
     def createTextBox(self,screen:Union[Tk,ctk.CTk,Toplevel,ctk.CTkToplevel],width:int = 0,height:int = 0,bg:str = "",fg:str = "",ppolice:str="Arial",ptaille:int=12,pstyle:str="normal",wrap:str="word",enableKeyboard:bool=False):
-        if (self.__mode == 0):
-            text = ctk.CTkTextbox(screen)
-            if (fg != ""):
-                text.configure(text_color=fg)
-            if (bg != ""):
-                text.configure(fg_color=bg)
-            if (width != 0):
-                text.configure(width=width)
-            if (height != 0):
-                text.configure(height=height)
+        text = ctk.CTkTextbox(screen)
+        if (fg != ""):
+            text.configure(text_color=fg)
+        if (bg != ""):
+            text.configure(fg_color=bg)
+        if (width != 0):
+            text.configure(width=width)
+        if (height != 0):
+            text.configure(height=height)
 
-            police = "Arial"
-            style = "normal"
-            taille = 12
+        police = "Arial"
+        style = "normal"
+        taille = 12
 
-            if (ppolice != "Arial"):
-                police = ppolice
-            if (ptaille != 12):
-                taille = ptaille
-            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
-                style = pstyle
+        if (ppolice != "Arial"):
+            police = ppolice
+        if (ptaille != 12):
+            taille = ptaille
+        if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
+            style = pstyle
 
-            text.configure(font=(police, taille, style),wrap=wrap)
-
-        else :
-            text = Text(screen,width=width,height=height,bg=bg,fg=fg)
-            if (fg != ""):
-                text.configure(fg=fg)
-            if (bg != ""):
-                text.configure(bg=bg)
-            if (width != 0):
-                text.configure(width=width)
-            if (height != 0):
-                text.configure(height=height)
-
-            police = "Arial"
-            style = "normal"
-            taille = 12
-
-            if (ppolice != "Arial"):
-                police = ppolice
-            if (ptaille != 12):
-                taille = ptaille
-            if (pstyle != "normal" and (pstyle == "bold" or pstyle == "italic" or pstyle == "underline")):
-                style = pstyle
-
-            text.configure(font=(police, taille, style))
+        text.configure(font=(police, taille, style),wrap=wrap)
 
         if not enableKeyboard:
             text.configure(state="disabled")
@@ -546,18 +410,17 @@ class CArreraTK :
         return text
 
     def createArreraBackgroudImage(self,screen:Union[Tk,ctk.CTk,Toplevel,ctk.CTkToplevel],imageLight:str,imageDark :str = "",height:int = 600,width:int = 800):
-        if (self.__mode == 0):
-            if (imageDark != ""):
-                image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight)),
-                                     dark_image=Image.open(self.__resource_path(imageDark)),
-                                     size=(width, height))
-            else :
-                image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight))
-                                     ,size=(width, height))
-            frame = ctk.CTkFrame(screen,width=width,height=height,border_width=0)
-            label = ctk.CTkLabel(frame,image=image,text="")
-            label.place(relx=0.5, rely=0.5, anchor='center')
-            return frame
+        if (imageDark != ""):
+            image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight)),
+                                 dark_image=Image.open(self.__resource_path(imageDark)),
+                                 size=(width, height))
+        else :
+            image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight))
+                                 ,size=(width, height))
+        frame = ctk.CTkFrame(screen,width=width,height=height,border_width=0)
+        label = ctk.CTkLabel(frame,image=image,text="")
+        label.place(relx=0.5, rely=0.5, anchor='center')
+        return frame
 
     def createHourPickert(self,screen,varHour:StringVar,varMinute:StringVar):
         hours   = [f"{h:02d}" for h in range(24)]
@@ -573,18 +436,10 @@ class CArreraTK :
         return widget
 
     def createTextBoxScrolled(self,screen:Union[Tk,ctk.CTk,Toplevel,ctk.CTkToplevel],ppolice:str="Arial",ptaille:int=12,pstyle:str="normal"):
-        if self.__mode == 0:
-            widget = self.createFrame(screen)
-            textbox = ctk.CTkTextbox(widget, wrap="word", state="disabled")
-            scrollbar = ctk.CTkScrollbar(widget, command=textbox.yview)
-            textbox.configure(yscrollcommand=scrollbar.set)
-
-        else :
-            widget = Frame(screen)
-            textbox = Text(widget, wrap="word", state="disabled")
-            scrollbar = Scrollbar(widget, orient="vertical", command=textbox.yview)
-            textbox.configure(yscrollcommand=scrollbar.set)
-            textbox.configure(font=(ppolice, ptaille, pstyle))
+        widget = self.createFrame(screen)
+        textbox = ctk.CTkTextbox(widget, wrap="word", state="disabled")
+        scrollbar = ctk.CTkScrollbar(widget, command=textbox.yview)
+        textbox.configure(yscrollcommand=scrollbar.set)
 
         # Layout
         widget.grid_rowconfigure(0, weight=1)
@@ -765,76 +620,38 @@ class CArreraTK :
         :return:
         """
 
-        if (self.__mode == 0):
-            apropos = ctk.CTkToplevel()
-            apropos.configure(bg=self.__windowsColor)
-            apropos.title("A propos : "+nameSoft)
-            apropos.maxsize(400,300)
-            apropos.minsize(400,300)
-            icon = ctk.CTkImage(light_image=Image.open(self.__resource_path(iconFile)),size=(100,100))
-            mainFrame = ctk.CTkFrame(apropos,width=400,height=250,border_width=0,fg_color=self.__windowsColor)
-            frameBTN = ctk.CTkFrame(apropos,width=400,height=50,border_width=0,fg_color=self.__windowsColor)
-            frameLabel = ctk.CTkFrame(apropos,border_width=0,fg_color=self.__windowsColor)
+        apropos = ctk.CTkToplevel()
+        apropos.configure(bg=self.__windowsColor)
+        apropos.title("A propos : "+nameSoft)
+        apropos.maxsize(400,300)
+        apropos.minsize(400,300)
+        icon = ctk.CTkImage(light_image=Image.open(self.__resource_path(iconFile)),size=(100,100))
+        mainFrame = ctk.CTkFrame(apropos,width=400,height=250,border_width=0,fg_color=self.__windowsColor)
+        frameBTN = ctk.CTkFrame(apropos,width=400,height=50,border_width=0,fg_color=self.__windowsColor)
+        frameLabel = ctk.CTkFrame(apropos,border_width=0,fg_color=self.__windowsColor)
 
-            labelIcon = ctk.CTkLabel(mainFrame,image=icon,text="",fg_color=self.__windowsColor)
-            labelSoft = ctk.CTkLabel(frameLabel,text=nameSoft+" version "+version,font=("Arial",20),fg_color=self.__windowsColor)
-            labelVersion = ctk.CTkLabel(frameLabel,text="Arrera TK version "+VERSIONARRERATK,font=("Arial",13),fg_color=self.__windowsColor)
-            labelCopy = ctk.CTkLabel(mainFrame,text=copyright,font=("Arial",13),fg_color=self.__windowsColor)
+        labelIcon = ctk.CTkLabel(mainFrame,image=icon,text="",fg_color=self.__windowsColor)
+        labelSoft = ctk.CTkLabel(frameLabel,text=nameSoft+" version "+version,font=("Arial",20),fg_color=self.__windowsColor)
+        labelVersion = ctk.CTkLabel(frameLabel,text="Arrera TK version "+VERSIONARRERATK,font=("Arial",13),fg_color=self.__windowsColor)
+        labelCopy = ctk.CTkLabel(mainFrame,text=copyright,font=("Arial",13),fg_color=self.__windowsColor)
 
-            btnLinkSource = ctk.CTkButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource),
-                                          font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
-            btnLinkWeb = ctk.CTkButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb),
-                                       font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
+        btnLinkSource = ctk.CTkButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource),
+                                      font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
+        btnLinkWeb = ctk.CTkButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb),
+                                   font=("Arial", 12,"bold"),fg_color=color_btn,hover_color=color_btn_hover)
 
-            labelIcon.place(relx=0.5, rely=0.0, anchor="n")
-            labelSoft.pack()
-            labelVersion.pack()
-            labelCopy.place(relx=0.5, rely=1.0, anchor="s")
+        labelIcon.place(relx=0.5, rely=0.0, anchor="n")
+        labelSoft.pack()
+        labelVersion.pack()
+        labelCopy.place(relx=0.5, rely=1.0, anchor="s")
 
-            frameLabel.place(relx=0.5, rely=0.5, anchor="center")
-            mainFrame.pack(side="top")
-            frameBTN.pack(side ="bottom")
+        frameLabel.place(relx=0.5, rely=0.5, anchor="center")
+        mainFrame.pack(side="top")
+        frameBTN.pack(side ="bottom")
 
 
-            btnLinkSource.place(relx=1, rely=1, anchor='se')
-            btnLinkWeb.place(relx=0, rely=1, anchor='sw')
-        else :
-            apropos = Toplevel()
-            apropos.title("A propos : " + nameSoft)
-            apropos.configure(bg=self.__windowsColor)
-            apropos.maxsize(400, 300)
-            apropos.minsize(400, 300)
-            icon = ctk.CTkImage(light_image=Image.open(iconFile), size=(100, 100))
-            mainFrame = Frame(apropos, width=400, height=250,bg=self.__windowsColor)
-            frameBTN = Frame(apropos, width=400, height=50,bg=self.__windowsColor)
-            frameLabel = Frame(apropos,bg=self.__windowsColor)
-
-            # Traitement Image
-            labelIcon = Label(mainFrame, bg=self.__windowsColor)
-            imageOrigine = Image.open(iconFile)
-            imageRedim = imageOrigine.resize((100,100))
-            icon = ImageTk.PhotoImage(imageRedim, master=labelIcon)
-            labelIcon.image_names = icon
-            labelIcon.configure(image=icon)
-
-            labelSoft = Label(frameLabel, text=nameSoft + " version " + version, font=("Arial", 20),bg=self.__windowsColor,fg=self.__textColor)
-            labelVersion = Label(frameLabel, text="Arrera TK version " + VERSIONARRERATK, font=("Arial", 13),bg=self.__windowsColor,fg=self.__textColor)
-            labelCopy = Label(mainFrame, text=copyright, font=("Arial", 13),bg=self.__windowsColor,fg=self.__textColor)
-
-            btnLinkSource = Button(frameBTN, text="Source code", command=lambda: wb.open(linkSource),bg=self.__windowsColor,fg=self.__textColor)
-            btnLinkWeb = Button(frameBTN, text="Web site", command=lambda: wb.open(linkWeb),bg=self.__windowsColor,fg=self.__textColor)
-
-            labelIcon.place(relx=0.5, rely=0.0, anchor="n")
-            labelSoft.pack()
-            labelVersion.pack()
-            labelCopy.place(relx=0.5, rely=1.0, anchor="s")
-
-            frameLabel.place(relx=0.5, rely=0.5, anchor="center")
-            mainFrame.pack(side="top")
-            frameBTN.pack(side="bottom")
-
-            btnLinkSource.place(relx=1, rely=1, anchor='se')
-            btnLinkWeb.place(relx=0, rely=1, anchor='sw')
+        btnLinkSource.place(relx=1, rely=1, anchor='se')
+        btnLinkWeb.place(relx=0, rely=1, anchor='sw')
 
     # Methode pour recuperer le theme actuel de l'application
 
