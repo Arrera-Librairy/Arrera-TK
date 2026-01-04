@@ -85,6 +85,11 @@ class aTopLevel(ctk.CTkToplevel):
             elif os.path.splitext(icon)[1].lower() == '.png' :
                 self.iconphoto(True, PhotoImage(file=icon))
 
+class aLabel(ctk.CTkLabel):
+    def __init(self):
+        super().__init__()
+
+
 class aButton(ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, theme: ATheme = None, **kwargs):
         self.theme = theme if theme else ATheme()
