@@ -8,22 +8,23 @@ import sys
 import platform
 from typing import Union
 
-VERSIONARRERATK = "1.5.0"
+VERSIONARRERATK = "2.0.0"
+
+
+def resource_path(relative_path):
+    if platform.system() == "Darwin":
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
+    else:
+        return relative_path
+
 
 class CArreraTK :
     def __init__(self):
         self.__windowsColor = ""
         self.__textColor = ""
         self.__images = []
-
-    # Methode pour gerer les asset sur mac os
-    def __resource_path(self,relative_path):
-        if platform.system() == "Darwin":
-            if hasattr(sys, '_MEIPASS'):
-                return os.path.join(sys._MEIPASS, relative_path)
-            return os.path.join(os.path.abspath("."), relative_path)
-        else:
-            return relative_path
 
     # Methode creation de fenetre ou toplevel
 
@@ -50,7 +51,7 @@ class CArreraTK :
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
         self.__root = ctk.CTk()
         self.__root.configure(fg_color=defaultColor)
-        icon = self.__resource_path(icon)
+        icon = resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
                 if os.path.splitext(icon)[1].lower() == '.ico' :
@@ -93,7 +94,7 @@ class CArreraTK :
             defaultColor = ctk.ThemeManager.theme["CTk"]["fg_color"][0]
             defaultTextColor = ctk.ThemeManager.theme["CTk"]["fg_color"][1]
         self.__root = ctk.CTkToplevel()
-        icon = self.__resource_path(icon)
+        icon = resource_path(icon)
         if icon != "":
             if platform.system() == "Windows":
                 if os.path.splitext(icon)[1].lower() == '.ico':
@@ -160,8 +161,8 @@ class CArreraTK :
         """
         if (pathDark != "none"):
             image = ctk.CTkImage(
-                light_image=Image.open(self.__resource_path(pathLight)),
-                dark_image=Image.open(self.__resource_path(pathDark)),
+                light_image=Image.open(resource_path(pathLight)),
+                dark_image=Image.open(resource_path(pathDark)),
                 size=(tailleX, tailleY))
             return image
         else :
@@ -310,7 +311,7 @@ class CArreraTK :
         if (bg != ""):
             canvas.configure(bg=bg)
         if (imageFile != ""):
-            photo = PhotoImage(file=self.__resource_path(imageFile),master=canvas)
+            photo = PhotoImage(file=resource_path(imageFile), master=canvas)
             canvas.image_names = photo
             canvas.create_image(0, 0, image=photo, anchor="nw")
         return canvas
@@ -411,11 +412,11 @@ class CArreraTK :
 
     def createArreraBackgroudImage(self,screen:Union[Tk,ctk.CTk,Toplevel,ctk.CTkToplevel],imageLight:str,imageDark :str = "",height:int = 600,width:int = 800):
         if (imageDark != ""):
-            image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight)),
-                                 dark_image=Image.open(self.__resource_path(imageDark)),
+            image = ctk.CTkImage(light_image=Image.open(resource_path(imageLight)),
+                                 dark_image=Image.open(resource_path(imageDark)),
                                  size=(width, height))
         else :
-            image = ctk.CTkImage(light_image=Image.open(self.__resource_path(imageLight))
+            image = ctk.CTkImage(light_image=Image.open(resource_path(imageLight))
                                  ,size=(width, height))
         frame = ctk.CTkFrame(screen,width=width,height=height,border_width=0)
         label = ctk.CTkLabel(frame,image=image,text="")
@@ -625,7 +626,7 @@ class CArreraTK :
         apropos.title("A propos : "+nameSoft)
         apropos.maxsize(400,300)
         apropos.minsize(400,300)
-        icon = ctk.CTkImage(light_image=Image.open(self.__resource_path(iconFile)),size=(100,100))
+        icon = ctk.CTkImage(light_image=Image.open(resource_path(iconFile)), size=(100, 100))
         mainFrame = ctk.CTkFrame(apropos,width=400,height=250,border_width=0,fg_color=self.__windowsColor)
         frameBTN = ctk.CTkFrame(apropos,width=400,height=50,border_width=0,fg_color=self.__windowsColor)
         frameLabel = ctk.CTkFrame(apropos,border_width=0,fg_color=self.__windowsColor)
