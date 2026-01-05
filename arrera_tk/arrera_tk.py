@@ -86,14 +86,18 @@ class aTopLevel(ctk.CTkToplevel):
                 self.iconphoto(True, PhotoImage(file=icon))
 
 class aLabel(ctk.CTkLabel):
-    def __init(self):
-        super().__init__()
-
+    def __init__(self, master, text: str = "Arrera Label", theme: ATheme = None, **kwargs):
+        self.theme = theme if theme else ATheme()
+        super().__init__(master, text=text, **kwargs)
+        
+        self.configure(
+            text_color=self.theme.on_surface,
+            font=(self.theme.font_family, 14)
+        )
 
 class aButton(ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, theme: ATheme = None, **kwargs):
         self.theme = theme if theme else ATheme()
-
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
         
         self.configure(
