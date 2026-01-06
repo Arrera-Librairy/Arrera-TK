@@ -3,9 +3,10 @@ topLevel_active = False
 button_active = False
 label_active = False
 frame_active = False
+about_active = False
 
 def gestion():
-    global topLevel_active, button_active, label_active,frame_active
+    global topLevel_active, button_active, label_active,frame_active,about_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -25,11 +26,19 @@ def gestion():
         aButton(frame, text="btn Frame").place(x=0,y=0)
         frame.pack()
 
+    if about_active :
+        windows_about("ArreraTK Teste",
+                      "image/test.png",
+                      "I2026",
+                      "MOI",
+                      "www.arrera-software.fr",
+                      "www.google.com")
+
     w.mainloop()
 
 
 def main():
-    global topLevel_active, button_active, label_active,frame_active
+    global topLevel_active, button_active, label_active,frame_active,about_active
     
     print("Menu texte Arrera TK\n")
     var = 1
@@ -39,6 +48,7 @@ def main():
             try :
                 var = int(input("1.TopLevel\n2.Button\n"
                                 "3.Label\n4.Frame\n"
+                                "5.A Propos\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -58,6 +68,9 @@ def main():
             case 4 :
                 frame_active = True
                 print("Frame Activer")
+            case 5 :
+                about_active = True
+                print("About Activer")
             case 0:
                 print("Lancement de l'interface...")
 

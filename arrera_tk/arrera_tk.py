@@ -1,8 +1,12 @@
 import customtkinter as ctk
 from tkinter import *
+from PIL import Image
+import webbrowser as wb
 import platform
 import os
 import sys
+
+VERSIONARRERATK = "2.0.0"
 
 # Fonction pour gerer les resource sur mac os
 def resource_path(relative_path):
@@ -65,3 +69,39 @@ class aTopLevel(ctk.CTkToplevel):
                     self.iconbitmap(icon)
             elif os.path.splitext(icon)[1].lower() == '.png' :
                 self.iconphoto(True, PhotoImage(file=icon))
+
+class windows_about(ctk.CTkToplevel):
+    def __init__(self,nameSoft:str,iconFile:str,version:str,copyright:str,linkSource:str,linkWeb:str):
+        super().__init__()
+        self.title("A propos : "+nameSoft)
+        self.maxsize(400,300)
+        self.minsize(400,300)
+
+
+        icon = ctk.CTkImage(light_image=Image.open(resource_path(iconFile)), size=(100, 100))
+        mainFrame = aFrame(self,width=400,height=250,border_width=0,corner_radius=0)
+        frameBTN = aFrame(self,width=400,height=50,border_width=0,corner_radius=0)
+        frameLabel = aFrame(self,border_width=0,corner_radius=0)
+
+        labelIcon = aLabel(mainFrame,image=icon,text="")
+        labelSoft = aLabel(frameLabel,text=nameSoft+" version "+version,font=("Roboto",20))
+        labelVersion = aLabel(frameLabel,text="Arrera TK version "+VERSIONARRERATK,font=("Roboto",13))
+        labelCopy = aLabel(mainFrame,text=copyright,font=("Roboto",13))
+
+        btnLinkSource = aButton(frameBTN,text="Source code",command= lambda :  wb.open(linkSource),
+                                      font=("Roboto", 13,"bold"))
+        btnLinkWeb = aButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb),
+                                   font=("Roboto", 13,"bold"))
+
+        labelIcon.place(relx=0.5, rely=0.0, anchor="n")
+        labelSoft.pack()
+        labelVersion.pack()
+        labelCopy.place(relx=0.5, rely=1.0, anchor="s")
+
+        frameLabel.place(relx=0.5, rely=0.5, anchor="center")
+        mainFrame.pack(side="top")
+        frameBTN.pack(side ="bottom")
+
+
+        btnLinkSource.place(relx=1, rely=1, anchor='se')
+        btnLinkWeb.place(relx=0, rely=1, anchor='sw')
