@@ -27,6 +27,27 @@ class aButton(ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, **kwargs):
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
 
+class aCheckBox(ctk.CTkCheckBox):
+    def __init__(self,master,boolean_value:bool):
+        if boolean_value:
+            self.__bVar = BooleanVar(master,value=True)
+        else :
+            self.__bVar = BooleanVar(master,value=True)
+        super().__init__(master,variable=self.__bVar,text="Arrera CheckBox")
+
+    def getBooleanVar(self):
+        return self.__bVar
+
+    def setFalse(self):
+        self.__bVar.set(False)
+
+    def setTrue(self):
+        self.__bVar.set(True)
+
+class aRadioButton(ctk.CTkRadioButton):
+    def __init__(self, master, text: str = "Arrera RadioButton", variable=None, value=0, command=None, **kwargs):
+        super().__init__(master, text=text, variable=variable, value=value, command=command, **kwargs)
+
 class aEntry(ctk.CTkEntry):
     def __init__(self,master,police_size:int=15,width:int=20):
         super().__init__(master)

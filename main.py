@@ -6,9 +6,11 @@ frame_active = False
 about_active = False
 entry_active = False
 text_box_active = False
+checkbox_active = False
+radio_button_active = False
 
 def gestion():
-    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active
+    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, checkbox_active,radio_button_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -43,12 +45,23 @@ def gestion():
         text = aText(w,center=True)
         text.pack()
 
+    if checkbox_active:
+        checkbox = aCheckBox(w,True)
+        print("Checkbox : ",checkbox.getBooleanVar)
+        checkbox.pack()
+
+    if radio_button_active:
+        radio = aRadioButton(w)
+        radio.pack()
+
+
+
 
     w.mainloop()
 
 
 def main():
-    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active
+    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, checkbox_active,radio_button_active
     
     print("Menu texte Arrera TK\n")
     var = 1
@@ -59,7 +72,8 @@ def main():
                 var = int(input("1.TopLevel\n2.Button\n"
                                 "3.Label\n4.Frame\n"
                                 "5.A Propos\n6.Entry\n"
-                                "7.TextBox\n"
+                                "7.TextBox\n8.Checkbox\n"
+                                "9.RadioButton\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -88,6 +102,12 @@ def main():
             case 7 :
                 text_box_active = True
                 print("Text Box Activer")
+            case 8 :
+                checkbox_active = True
+                print("Checkbox Activer")
+            case 9 :
+                radio_button_active = True
+                print("RadioButton Activer")
             case 0:
                 print("Lancement de l'interface...")
 
