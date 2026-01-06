@@ -56,3 +56,8 @@ class aLabel(ctk.CTkLabel):
 class aButton(ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, **kwargs):
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
+
+class aFrame(ctk.CTkFrame):
+    def __init__(self, master,corner_radius: int = 20, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(corner_radius=corner_radius)
