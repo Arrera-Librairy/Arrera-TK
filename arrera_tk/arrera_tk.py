@@ -27,6 +27,26 @@ class aButton(ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, **kwargs):
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
 
+class aEntry(ctk.CTkEntry):
+    def __init__(self,master,police_size:int=15,width:int=20):
+        super().__init__(master)
+        self.configure(font=("Roboto",police_size,"bold"))
+        self.configure(width=width)
+
+class aText(ctk.CTkTextbox):
+    def __init__(self,master,police_size:int=15,center:bool=False):
+        super().__init__(master)
+        self.configure(font=("Roboto",police_size,"normal"))
+
+        if center:
+            self._textbox.tag_configure("center", justify="center")
+            self._textbox.tag_add("center", "0.0", "end")
+
+
+
+
+# Frame / Canvas
+
 class aFrame(ctk.CTkFrame):
     def __init__(self, master,corner_radius: int = 20, **kwargs):
         super().__init__(master, **kwargs)
