@@ -94,6 +94,7 @@ class aBackgroundImage(ctk.CTkFrame):
             background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
                                       dark_image=Image.open(resource_path(background_dark)),
                                       size=(width, height))
+        self.__size = (width,height)
         super().__init__(master)
         self.configure(width=width,height=height)
         self.configure(border_width=0)
@@ -101,6 +102,18 @@ class aBackgroundImage(ctk.CTkFrame):
         self.__label = aLabel(self,text="",image=background)
         self.__label.place(relx=0.5, rely=0.5, anchor='center')
 
+    def change_background(self,background_light:str,background_dark:str=""):
+        if background_dark != "":
+            background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
+                                      dark_image=Image.open(resource_path(background_light)),
+                                      size=self.__size)
+        else :
+            background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
+                                      dark_image=Image.open(resource_path(background_dark)),
+                                      size=self.__size)
+
+        self.__label.configure(image=background)
+        self.update()
 
 # Fenetre
 
