@@ -6,6 +6,8 @@ import platform
 import os
 import sys
 
+from customtkinter import CTkCanvas
+
 VERSIONARRERATK = "2.0.0"
 
 # Fonction pour gerer les resource sur mac os
@@ -72,6 +74,33 @@ class aFrame(ctk.CTkFrame):
     def __init__(self, master,corner_radius: int = 20, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(corner_radius=corner_radius)
+
+class aScrollableFrame(ctk.CTkScrollableFrame):
+    def __init__(self, master,corner_radius: int = 20, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(corner_radius=corner_radius)
+
+class aCanvas(ctk.CTkCanvas):
+    def __init__(self,master):
+        super().__init__(master)
+
+class aBackgroundImage(ctk.CTkFrame):
+    def __init__(self,master,background_light:str,background_dark:str="",height:int = 600,width:int = 800):
+        if background_dark != "":
+            background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
+                                      dark_image=Image.open(resource_path(background_light)),
+                                      size=(width, height))
+        else :
+            background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
+                                      dark_image=Image.open(resource_path(background_dark)),
+                                      size=(width, height))
+        super().__init__(master)
+        self.configure(width=width,height=height)
+        self.configure(border_width=0)
+
+        self.__label = aLabel(self,text="",image=background)
+        self.__label.place(relx=0.5, rely=0.5, anchor='center')
+
 
 # Fenetre
 

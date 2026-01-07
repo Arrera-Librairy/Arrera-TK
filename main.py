@@ -8,9 +8,13 @@ entry_active = False
 text_box_active = False
 checkbox_active = False
 radio_button_active = False
+scrollableframe_active = False
+canvas_active = False
+backgroundimage_active = False
 
 def gestion():
-    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, checkbox_active,radio_button_active
+    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -54,14 +58,24 @@ def gestion():
         radio = aRadioButton(w)
         radio.pack()
 
+    if scrollableframe_active:
+        scrollableframe = aScrollableFrame(w)
+        scrollableframe.pack()
 
+    if canvas_active:
+        canvas = aCanvas(w)
+        canvas.pack()
 
+    if backgroundimage_active:
+        bimage = aBackgroundImage(w,"image/test.png","image/test2.png")
+        bimage.pack()
 
     w.mainloop()
 
 
 def main():
-    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, checkbox_active,radio_button_active
+    global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active
     
     print("Menu texte Arrera TK\n")
     var = 1
@@ -73,7 +87,8 @@ def main():
                                 "3.Label\n4.Frame\n"
                                 "5.A Propos\n6.Entry\n"
                                 "7.TextBox\n8.Checkbox\n"
-                                "9.RadioButton\n"
+                                "9.RadioButton\n10.ScrollableFrame\n"
+                                "11.Canvas\n12.Background Image\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -108,6 +123,15 @@ def main():
             case 9 :
                 radio_button_active = True
                 print("RadioButton Activer")
+            case 10:
+                scrollableframe_active = True
+                print("ScrollableFrame Activer")
+            case 11 :
+                canvas_active = True
+                print("Canvas Activer")
+            case 12 :
+                backgroundimage_active = True
+                print("Background Image Activer")
             case 0:
                 print("Lancement de l'interface...")
 
