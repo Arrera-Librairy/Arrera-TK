@@ -19,15 +19,46 @@ hour_pickers_active = False
 swicht_active = False
 test_placement_active = False
 
+theme = ""
+dictTheme = {
+    "default":"theme/theme_default.json"
+    ,"Blanc/Gris":"theme/theme_blanc_gris.json"}
+
 def checkSwictBTN(s:aSwicht):
     print(s.getValue())
+
+def setTheme():
+    global theme,dictTheme
+
+    print("Choix du theme d'Arrera TK")
+
+    var = 1
+
+    ok = False
+    while not ok:
+        try :
+            var = int(input("1.Blanc/Gris\n"
+                            "0.Theme par default\n# "))
+            ok = True
+        except ValueError:
+            print("Valeur invalide")
+            ok = False
+
+    match var:
+        case 1 :
+            theme = list(dictTheme.keys())[1]
+
+        case 0 :
+            theme = list(dictTheme.keys())[0]
+
+
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active ,\
-        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active,swicht_active,test_placement_active
+        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active,swicht_active,test_placement_active,theme,dictTheme
     
-    w = aTk(title="Teste Arrera TK")
+    w = aTk(title="Teste Arrera TK",theme_file=dictTheme[theme])
 
     if label_active:
         label = aLabel(w, text="Super label")
@@ -133,6 +164,9 @@ def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active , \
         entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active,swicht_active,test_placement_active
+
+
+    setTheme()
 
     print("Menu texte Arrera TK\n")
     var = 1
