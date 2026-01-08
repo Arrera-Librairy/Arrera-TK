@@ -16,11 +16,15 @@ entry_legend_active = False
 optionmenu_active = False
 optionmenu_legend_active = False
 hour_pickers_active = False
+swicht_active = False
+
+def checkSwictBTN(s:aSwicht):
+    print(s.getValue())
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active ,\
-        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active
+        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active,swicht_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -101,6 +105,9 @@ def gestion():
         hour_pickers = aHourPickers(w)
         hour_pickers.pack()
 
+    if swicht_active:
+        swicht = aSwicht(w,command=lambda : checkSwictBTN(swicht))
+        swicht.pack()
 
     w.mainloop()
 
@@ -108,7 +115,7 @@ def gestion():
 def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active , \
-        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active
+        entry_legend_active,optionmenu_active,optionmenu_legend_active,hour_pickers_active,swicht_active
 
     print("Menu texte Arrera TK\n")
     var = 1
@@ -124,7 +131,7 @@ def main():
                                 "11.Canvas\n12.Background Image\n"
                                 "13.Text Box Scroll\n14.Entry Lengend\n"
                                 "15.Option Menu\n16.Option Menu Lengend\n"
-                                "17.Hour pickers\n"
+                                "17.Hour pickers\n18.Swicht\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -183,6 +190,9 @@ def main():
             case 17:
                 hour_pickers_active = True
                 print("Hour Pickers Activer")
+            case 18:
+                swicht_active = True
+                print("Swicht Activer")
             case 0:
                 print("Lancement de l'interface...")
 
