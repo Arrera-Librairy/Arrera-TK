@@ -130,6 +130,35 @@ class aEntryLengend(ctk.CTkFrame):
     def changePoliceLabel(self,font:(str,int,str)=("Roboto",15,"bold")):
         self.__label.configure(font=font)
 
+class aOptionMenu(ctk.CTkOptionMenu):
+    def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str=""):
+        self.__var = StringVar()
+
+        super().__init__(master,values=value,variable=self.__var)
+
+        if bg != "":
+            self.configure(fg_color=bg)
+
+        if fg != "":
+            self.configure(text_color=fg)
+
+        self.configure(font=("Roboto",police_size,"bold"))
+
+        self.__var.set(value[0])
+
+    def getValue(self):
+        return self.__var.get()
+
+    def changeColor(self,bg:str="",fg:str=""):
+        if bg != "":
+            self.configure(fg_color=bg)
+
+        if fg != "":
+            self.configure(text_color=fg)
+
+    def changePolice(self,font:(str,int,str)=("Roboto",15,"bold")):
+        self.configure(font=font)
+
 # Frame / Canvas
 
 class aFrame(ctk.CTkFrame):

@@ -13,11 +13,12 @@ canvas_active = False
 backgroundimage_active = False
 textbox_scroll_active = False
 entry_legend_active = False
+optionmenu_active = False
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active ,\
-        entry_legend_active
+        entry_legend_active,optionmenu_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -82,13 +83,19 @@ def gestion():
         entry_legend = aEntryLengend(w)
         entry_legend.pack()
 
+    if optionmenu_active :
+        super_list = ["Option 1","Option 2","Option 3"]
+        optionmenu = aOptionMenu(w,value=super_list)
+        optionmenu.pack()
+        print(optionmenu.getValue())
+
     w.mainloop()
 
 
 def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active , \
-        entry_legend_active
+        entry_legend_active,optionmenu_active
 
     print("Menu texte Arrera TK\n")
     var = 1
@@ -103,6 +110,7 @@ def main():
                                 "9.RadioButton\n10.ScrollableFrame\n"
                                 "11.Canvas\n12.Background Image\n"
                                 "13.Text Box Scroll\n14.Entry Lengend\n"
+                                "15.Option Menu\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -152,6 +160,9 @@ def main():
             case 14 :
                 entry_legend_active = True
                 print("Entry Legend Activer")
+            case 15:
+                optionmenu_active = True
+                print("Option Menu Activer")
             case 0:
                 print("Lancement de l'interface...")
 
