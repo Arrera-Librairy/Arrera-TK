@@ -19,17 +19,123 @@ def resource_path(relative_path):
     else:
         return relative_path
 
+# Class de placement custome
+
+class placement_Tool_Kit_internet:
+    def placeCenter(self):
+        self.place(relx=0.5, rely=0.5, anchor='center')
+
+    def placeLeftCenter(self):
+        self.place(relx=0, rely=0.5, anchor='w')
+
+    def placeRightCenter(self):
+        self.place(relx=1, rely=0.5, anchor='e')
+
+    def placeTopCenter(self):
+        self.place(relx=0.5, rely=0, anchor='n')
+
+    def placeBottomCenter(self):
+        self.place(relx=0.5, rely=1, anchor='s')
+
+    def placeCenterOnWidth(self,y :int = 0 ):
+        if (y==0):
+            return
+        else :
+            self.place(relx=0.5, y=y, anchor='n')
+
+    def placeWidgetCenteredAtBottom(self, x_offset=1):
+        self.place(relx=0.5, rely=1, x=-x_offset, anchor="s")
+
+    def placeBottomRight(self):
+        self.place(relx=1, rely=1, anchor='se')
+
+    def placeBottomLeft(self):
+        self.place(relx=0, rely=1, anchor='sw')
+
+    def placeTopRight(self):
+        self.place(relx=1, rely=0, anchor='ne')
+
+    def placeTopLeft(self):
+        self.place(relx=0, rely=0, anchor='nw')
+
+    def placeCenterRight(self):
+        self.place(relx=1, rely=0.5, anchor='e')
+
+    def placeCenterLeft(self):
+        self.place(relx=0, rely=0.5, anchor='w')
+
+    def placeLeftBottomNoStick(self):
+        self.place(relx=0, rely=1, anchor='sw', x=10, y=-10)
+
+    def placeRightBottomNoStick(self):
+        self.place(relx=1, rely=1, anchor='se', x=-10, y=-10)
+
+    def placeBottomCenterNoStick(self):
+        self.place(relx=0.5, rely=1, anchor='s', x=0, y=-10)
+
+    # Pack
+
+    def pack(self,xExpand : bool = False , yExpand : bool = False):
+        if xExpand and yExpand:
+            self.pack(expand="both")
+        elif xExpand:
+            self.pack(expand="x")
+        elif yExpand:
+            self.pack(expand="y")
+        else:
+            self.pack()
+
+    def packLeft(self,xExpand : bool = False , yExpand : bool = False):
+        if xExpand and yExpand:
+            self.pack(expand="both",side="left")
+        elif xExpand:
+            self.pack(expand="x",side="left")
+        elif yExpand:
+            self.pack(expand="y",side="left")
+        else:
+            self.pack(side="left")
+
+    def packRight(self,xExpand : bool = False , yExpand : bool = False):
+        if xExpand and yExpand:
+            self.pack(expand="both",side="right")
+        elif xExpand:
+            self.pack(expand="x",side="right")
+        elif yExpand:
+            self.pack(expand="y",side="right")
+        else:
+            self.pack(side="right")
+
+    def packTop(self,xExpand : bool = False , yExpand : bool = False):
+        if xExpand and yExpand:
+            self.pack(expand="both",side="top")
+        elif xExpand:
+            self.pack(expand="x",side="top")
+        elif yExpand:
+            self.pack(expand="y",side="top")
+        else:
+            self.pack(side="top")
+
+    def packBottom(self,xExpand : bool = False , yExpand : bool = False):
+        if xExpand and yExpand:
+            self.pack(expand="both",side="bottom")
+        elif xExpand:
+            self.pack(expand="x",side="bottom")
+        elif yExpand:
+            self.pack(expand="y",side="bottom")
+        else:
+            self.pack(side="bottom")
+
 # Widget
 
-class aLabel(ctk.CTkLabel):
+class aLabel(ctk.CTkLabel, placement_Tool_Kit_internet):
     def __init__(self, master, text: str = "Arrera Label", **kwargs):
         super().__init__(master, text=text, **kwargs)
 
-class aButton(ctk.CTkButton):
+class aButton(ctk.CTkButton, placement_Tool_Kit_internet):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None, **kwargs):
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
 
-class aCheckBox(ctk.CTkCheckBox):
+class aCheckBox(ctk.CTkCheckBox, placement_Tool_Kit_internet):
     def __init__(self,master,boolean_value:bool, **kwargs):
         if boolean_value:
             self.__bVar = BooleanVar(master,value=True)
@@ -46,17 +152,17 @@ class aCheckBox(ctk.CTkCheckBox):
     def setTrue(self):
         self.__bVar.set(True)
 
-class aRadioButton(ctk.CTkRadioButton):
+class aRadioButton(ctk.CTkRadioButton, placement_Tool_Kit_internet):
     def __init__(self, master, text: str = "Arrera RadioButton", variable=None, value=0, command=None, **kwargs):
         super().__init__(master, text=text, variable=variable, value=value, command=command, **kwargs)
 
-class aEntry(ctk.CTkEntry):
+class aEntry(ctk.CTkEntry, placement_Tool_Kit_internet):
     def __init__(self,master,police_size:int=15,width:int=20, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(font=("Roboto",police_size,"bold"))
         self.configure(width=width)
 
-class aText(ctk.CTkTextbox):
+class aText(ctk.CTkTextbox, placement_Tool_Kit_internet):
     def __init__(self,master,police_size:int=15,center:bool=False, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(font=("Roboto",police_size,"normal"))
@@ -80,7 +186,7 @@ class aText(ctk.CTkTextbox):
     def centre_text(self):
         self._textbox.tag_configure("center", justify="center")
 
-class aTextScrollable(ctk.CTkFrame):
+class aTextScrollable(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self,master):
         super().__init__(master)
         self.configure(border_width=0)
@@ -105,7 +211,7 @@ class aTextScrollable(ctk.CTkFrame):
     def disableTextBox(self):
         self.__textbox.configure(state="disabled")
 
-class aEntryLengend(ctk.CTkFrame):
+class aEntryLengend(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self,master,text:str="Arrera Entry Legend",bg:str="",fg:str="",police_size:int=15,width:int=200,gridUsed:bool=False):
         super().__init__(master)
         text = text + ":  "
@@ -145,7 +251,7 @@ class aEntryLengend(ctk.CTkFrame):
     def changePoliceLabel(self,font:(str,int,str)=("Roboto",15,"bold")):
         self.__label.configure(font=font)
 
-class aOptionMenu(ctk.CTkOptionMenu):
+class aOptionMenu(ctk.CTkOptionMenu, placement_Tool_Kit_internet):
     def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str="",width:int=200, **kwargs):
         self.__var = StringVar()
 
@@ -174,7 +280,7 @@ class aOptionMenu(ctk.CTkOptionMenu):
     def changePolice(self,font:(str,int,str)=("Roboto",15,"bold")):
         self.configure(font=font)
 
-class aOptionMenuLengend(ctk.CTkFrame):
+class aOptionMenuLengend(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self,master,values:list,text:str="Arrera OptionMenu Legend",bg:str="",fg:str="",police_size:int=15,gridUsed:bool=False):
         super().__init__(master)
         text = text + ":  "
@@ -217,7 +323,7 @@ class aOptionMenuLengend(ctk.CTkFrame):
     def changePoliceLabel(self,font:(str,int,str)=("Roboto",15,"bold")):
         self.__label.configure(font=font)
 
-class aHourPickers(ctk.CTkFrame):
+class aHourPickers(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self,master):
         super().__init__(master)
 
@@ -239,7 +345,7 @@ class aHourPickers(ctk.CTkFrame):
     def getValueMinute(self):
         return self.__minute.getValue()
 
-class aSwicht(ctk.CTkSwitch):
+class aSwicht(ctk.CTkSwitch, placement_Tool_Kit_internet):
     def __init__(self,master,text="Arrera Button Swicht",default_value:bool=False,**kwargs):
         self.__var = BooleanVar(value=default_value)
         super().__init__(master,text=text,variable=self.__var,onvalue=True,offvalue=False,**kwargs)
@@ -261,12 +367,12 @@ class aSwicht(ctk.CTkSwitch):
 
 # Frame / Canvas
 
-class aFrame(ctk.CTkFrame):
+class aFrame(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self, master,corner_radius: int = 20, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(corner_radius=corner_radius)
 
-class aScrollableFrame(ctk.CTkScrollableFrame):
+class aScrollableFrame(ctk.CTkScrollableFrame, placement_Tool_Kit_internet):
     def __init__(self, master,corner_radius: int = 20, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(corner_radius=corner_radius)
@@ -275,7 +381,7 @@ class aCanvas(ctk.CTkCanvas):
     def __init__(self,master):
         super().__init__(master)
 
-class aBackgroundImage(ctk.CTkFrame):
+class aBackgroundImage(ctk.CTkFrame, placement_Tool_Kit_internet):
     def __init__(self,master,background_light:str,background_dark:str="",height:int = 600,width:int = 800, **kwargs):
         if background_dark != "":
             background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
@@ -367,15 +473,130 @@ class windows_about(ctk.CTkToplevel):
         btnLinkWeb = aButton(frameBTN,text="Web site",command= lambda :  wb.open(linkWeb),
                                    font=("Roboto", 13,"bold"))
 
-        labelIcon.place(relx=0.5, rely=0.0, anchor="n")
+        labelIcon.placeTopCenter()
         labelSoft.pack()
         labelVersion.pack()
-        labelCopy.place(relx=0.5, rely=1.0, anchor="s")
+        labelCopy.placeBottomCenter()
 
-        frameLabel.place(relx=0.5, rely=0.5, anchor="center")
+        frameLabel.placeCenter()
         mainFrame.pack(side="top")
         frameBTN.pack(side ="bottom")
 
 
-        btnLinkSource.place(relx=1, rely=1, anchor='se')
-        btnLinkWeb.place(relx=0, rely=1, anchor='sw')
+        btnLinkSource.placeRightCenter()
+        btnLinkWeb.placeLeftCenter()
+
+def placeLeftTop(widget):
+    widget.place(relx=0, rely=0, anchor='nw')
+
+def placeRightTop(widget):
+    widget.place(relx=1, rely=0, anchor='ne')
+
+def placeLeftBottom(widget):
+    widget.place(relx=0, rely=1, anchor='sw')
+
+def placeRightBottom(widget):
+    widget.place(relx=1, rely=1, anchor='se')
+
+def placeCenter(widget):
+    widget.place(relx=0.5, rely=0.5, anchor='center')
+
+def placeLeftCenter(widget):
+    widget.place(relx=0, rely=0.5, anchor='w')
+
+def placeRightCenter(widget):
+    widget.place(relx=1, rely=0.5, anchor='e')
+
+def placeTopCenter(widget):
+    widget.place(relx=0.5, rely=0, anchor='n')
+
+def placeBottomCenter(widget):
+    widget.place(relx=0.5, rely=1, anchor='s')
+
+def placeCenterOnWidth(widget,y :int = 0 ):
+    if y==0:
+        return
+    else :
+        widget.place(relx=0.5, y=y, anchor='n')
+
+def placeWidgetCenteredAtBottom(widget, x_offset=1):
+    widget.place(relx=0.5, rely=1, x=-x_offset, anchor="s")
+
+def placeBottomRight(widget):
+    widget.place(relx=1, rely=1, anchor='se')
+
+def placeBottomLeft(widget):
+    widget.place(relx=0, rely=1, anchor='sw')
+
+def placeTopRight(widget):
+    widget.place(relx=1, rely=0, anchor='ne')
+
+def placeTopLeft(widget):
+    widget.place(relx=0, rely=0, anchor='nw')
+
+def placeCenterRight(widget):
+    widget.place(relx=1, rely=0.5, anchor='e')
+
+def placeCenterLeft(widget):
+    widget.place(relx=0, rely=0.5, anchor='w')
+
+def placeLeftBottomNoStick(widget):
+    widget.place(relx=0, rely=1, anchor='sw', x=10, y=-10)
+
+def placeRightBottomNoStick(widget):
+    widget.place(relx=1, rely=1, anchor='se', x=-10, y=-10)
+
+def placeBottomCenterNoStick(widget):
+    widget.place(relx=0.5, rely=1, anchor='s', x=0, y=-10)
+
+# Pack
+
+def pack(widget,xExpand : bool = False , yExpand : bool = False):
+    if xExpand and yExpand:
+        widget.pack(expand="both")
+    elif xExpand:
+        widget.pack(expand="x")
+    elif yExpand:
+        widget.pack(expand="y")
+    else:
+        widget.pack()
+
+def packLeft(widget,xExpand : bool = False , yExpand : bool = False):
+    if xExpand and yExpand:
+        widget.pack(expand="both",side="left")
+    elif xExpand:
+        widget.pack(expand="x",side="left")
+    elif yExpand:
+        widget.pack(expand="y",side="left")
+    else:
+        widget.pack(side="left")
+
+def packRight(widget,xExpand : bool = False , yExpand : bool = False):
+    if xExpand and yExpand:
+        widget.pack(expand="both",side="right")
+    elif xExpand:
+        widget.pack(expand="x",side="right")
+    elif yExpand:
+        widget.pack(expand="y",side="right")
+    else:
+        widget.pack(side="right")
+
+def packTop(widget,xExpand : bool = False , yExpand : bool = False):
+    if xExpand and yExpand:
+        widget.pack(expand="both",side="top")
+    elif xExpand:
+        widget.pack(expand="x",side="top")
+    elif yExpand:
+        widget.pack(expand="y",side="top")
+    else:
+        widget.pack(side="top")
+
+def packBottom(widget,xExpand : bool = False , yExpand : bool = False):
+    if xExpand and yExpand:
+        widget.pack(expand="both",side="bottom")
+    elif xExpand:
+        widget.pack(expand="x",side="bottom")
+    elif yExpand:
+        widget.pack(expand="y",side="bottom")
+    else:
+        widget.pack(side="bottom")
