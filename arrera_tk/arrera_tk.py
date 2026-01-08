@@ -415,7 +415,7 @@ class aBackgroundImage(ctk.CTkFrame, placement_Tool_Kit_internet):
 # Fenetre
 
 class aTk(ctk.CTk):
-    def __init__(self, title: str = "ArreraTK", width: int = 800, height: int = 600, resizable: bool = False, icon: str = "",theme_file:str="theme/theme_material3.json", **kwargs):
+    def __init__(self, title: str = "ArreraTK", width: int = 800, height: int = 600, resizable: bool = False, icon: str = "",theme_file:str="theme/theme_default.json", **kwargs):
         super().__init__(**kwargs)
         try :
             ctk.set_default_color_theme(resource_path(theme_file))
