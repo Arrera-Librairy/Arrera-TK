@@ -14,11 +14,12 @@ backgroundimage_active = False
 textbox_scroll_active = False
 entry_legend_active = False
 optionmenu_active = False
+optionmenu_legend_active = False
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active ,\
-        entry_legend_active,optionmenu_active
+        entry_legend_active,optionmenu_active,optionmenu_legend_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -89,13 +90,20 @@ def gestion():
         optionmenu.pack()
         print(optionmenu.getValue())
 
+    if optionmenu_legend_active:
+        super_list = ["Option 1","Option 2","Option 3"]
+        optionmenu_legend = aOptionMenuLengend(w,values=super_list)
+        optionmenu_legend.pack()
+        print(optionmenu_legend.getValue())
+
+
     w.mainloop()
 
 
 def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
         checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active , \
-        entry_legend_active,optionmenu_active
+        entry_legend_active,optionmenu_active,optionmenu_legend_active
 
     print("Menu texte Arrera TK\n")
     var = 1
@@ -110,7 +118,7 @@ def main():
                                 "9.RadioButton\n10.ScrollableFrame\n"
                                 "11.Canvas\n12.Background Image\n"
                                 "13.Text Box Scroll\n14.Entry Lengend\n"
-                                "15.Option Menu\n"
+                                "15.Option Menu\n16.Option Menu Lengend\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -163,6 +171,9 @@ def main():
             case 15:
                 optionmenu_active = True
                 print("Option Menu Activer")
+            case 16:
+                optionmenu_legend_active = True
+                print("Option Menu Legend Activer")
             case 0:
                 print("Lancement de l'interface...")
 
