@@ -47,7 +47,7 @@ def setTheme():
     ok = False
     while not ok:
         try :
-            var = int(input("1.Blanc/Gris\n2.Bleu/Blanc\n3.Bleu/Violet\n4.Orange\n5.Rouge\n6.Rose\n7.Bleu\n8.Jaune\n9.Blanc\n"
+            var = int(input("1.Blanc/Gris\n2.Bleu/Blanc\n3.Bleu/Violet\n4.Orange\n5.Rouge\n6.Rose\n7.Bleu\n8.Jaune\n9.Blanc\n10.Gris"
                             "\n0.Theme par default\n# "))
             ok = True
         except ValueError:
