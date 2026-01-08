@@ -131,7 +131,7 @@ class aEntryLengend(ctk.CTkFrame):
         self.__label.configure(font=font)
 
 class aOptionMenu(ctk.CTkOptionMenu):
-    def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str=""):
+    def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str="",width:int=200):
         self.__var = StringVar()
 
         super().__init__(master,values=value,variable=self.__var)
@@ -201,6 +201,29 @@ class aOptionMenuLengend(ctk.CTkFrame):
 
     def changePoliceLabel(self,font:(str,int,str)=("Roboto",15,"bold")):
         self.__label.configure(font=font)
+
+class aHourPickers(ctk.CTkFrame):
+    def __init__(self,master):
+        super().__init__(master)
+
+        hours   = [f"{h:02d}" for h in range(24)]
+        minutes = [f"{m:02d}" for m in range(60)]
+
+        self.__hour = aOptionMenu(self,value=hours,width=10)
+        self.__minute = aOptionMenu(self,value=minutes,width=10)
+
+        label = aLabel(self,text=" : ",font=("Roboto",20,"bold"))
+
+        self.__hour.pack(side="left")
+        label.pack(side="left")
+        self.__minute.pack(side="left")
+
+    def getValueHour(self):
+        return self.__hour.getValue()
+
+    def getValueMinute(self):
+        return self.__minute.getValue()
+
 
 # Frame / Canvas
 
