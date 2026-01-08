@@ -12,10 +12,12 @@ scrollableframe_active = False
 canvas_active = False
 backgroundimage_active = False
 textbox_scroll_active = False
+entry_legend_active = False
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
-        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active ,\
+        entry_legend_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -76,12 +78,17 @@ def gestion():
         textbox_scroll.enableTextBox()
         textbox_scroll.pack()
 
+    if entry_legend_active :
+        entry_legend = aEntryLengend(w)
+        entry_legend.pack()
+
     w.mainloop()
 
 
 def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
-        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active , \
+        entry_legend_active
 
     print("Menu texte Arrera TK\n")
     var = 1
@@ -95,7 +102,7 @@ def main():
                                 "7.TextBox\n8.Checkbox\n"
                                 "9.RadioButton\n10.ScrollableFrame\n"
                                 "11.Canvas\n12.Background Image\n"
-                                "13.Text Box Scroll\n"
+                                "13.Text Box Scroll\n14.Entry Lengend\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -142,6 +149,9 @@ def main():
             case 13 :
                 textbox_scroll_active = True
                 print("Text Box Scroll Activer")
+            case 14 :
+                entry_legend_active = True
+                print("Entry Legend Activer")
             case 0:
                 print("Lancement de l'interface...")
 
