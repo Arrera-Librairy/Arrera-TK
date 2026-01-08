@@ -25,7 +25,8 @@ dictTheme = {
     ,"Blanc/Gris":"theme/theme_blanc_gris.json",
     "Bleu/Blanc":"theme/theme_bleu_blanc.json",
     "Bleu/Violet":"theme/theme_bleu_violet.json",
-    "orange":"theme/theme_orange.json"}
+    "orange":"theme/theme_orange.json",
+    "rouge":"theme/theme_rouge.json"}
 
 def checkSwictBTN(s:aSwicht):
     print(s.getValue())
@@ -40,7 +41,7 @@ def setTheme():
     ok = False
     while not ok:
         try :
-            var = int(input("1.Blanc/Gris\n2.Bleu/Blanc\n3.Bleu/Violet\n4.Orange\n"
+            var = int(input("1.Blanc/Gris\n2.Bleu/Blanc\n3.Bleu/Violet\n4.Orange\n5.Rouge\n"
                             "0.Theme par default\n# "))
             ok = True
         except ValueError:
