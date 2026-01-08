@@ -11,10 +11,11 @@ radio_button_active = False
 scrollableframe_active = False
 canvas_active = False
 backgroundimage_active = False
+textbox_scroll_active = False
 
 def gestion():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
-        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active
     
     w = aTk(title="Teste Arrera TK")
 
@@ -70,13 +71,18 @@ def gestion():
         bimage = aBackgroundImage(w,"image/test.png","image/test2.png")
         bimage.pack()
 
+    if textbox_scroll_active :
+        textbox_scroll = aTextScrollable(w)
+        textbox_scroll.enableTextBox()
+        textbox_scroll.pack()
+
     w.mainloop()
 
 
 def main():
     global topLevel_active, button_active, label_active,frame_active,about_active,entry_active,text_box_active, \
-        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active
-    
+        checkbox_active,radio_button_active,scrollableframe_active,canvas_active,backgroundimage_active,textbox_scroll_active
+
     print("Menu texte Arrera TK\n")
     var = 1
     while var != 0:
@@ -89,6 +95,7 @@ def main():
                                 "7.TextBox\n8.Checkbox\n"
                                 "9.RadioButton\n10.ScrollableFrame\n"
                                 "11.Canvas\n12.Background Image\n"
+                                "13.Text Box Scroll\n"
                                 "0.Lancer\n# "))
                 ok = True
             except ValueError:
@@ -132,6 +139,9 @@ def main():
             case 12 :
                 backgroundimage_active = True
                 print("Background Image Activer")
+            case 13 :
+                textbox_scroll_active = True
+                print("Text Box Scroll Activer")
             case 0:
                 print("Lancement de l'interface...")
 

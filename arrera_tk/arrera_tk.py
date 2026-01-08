@@ -65,7 +65,30 @@ class aText(ctk.CTkTextbox):
             self._textbox.tag_configure("center", justify="center")
             self._textbox.tag_add("center", "0.0", "end")
 
+class aTextScrollable(ctk.CTkFrame):
+    def __init__(self,master):
+        super().__init__(master)
+        self.configure(border_width=0)
 
+        self.__textbox = ctk.CTkTextbox(self, wrap="word", state="disabled")
+        scrollbar = ctk.CTkScrollbar(self, command=self.__textbox.yview)
+        self.__textbox.configure(yscrollcommand=scrollbar.set)
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        self.__textbox.grid(row=0, column=0, sticky="nsew", padx=(10, 0), pady=10)
+        scrollbar.grid(row=0, column=1, sticky="ns", padx=(0, 10), pady=10)
+
+    def getTextBox(self):
+        return self.__textbox
+
+    def enableTextBox(self):
+        self.__textbox.configure(state="normal")
+        self.__textbox.focus()
+
+    def disableTextBox(self):
+        self.__textbox.configure(state="disabled")
 
 
 # Frame / Canvas
