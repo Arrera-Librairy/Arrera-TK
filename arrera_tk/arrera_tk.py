@@ -30,12 +30,12 @@ class aButton(ctk.CTkButton):
         super().__init__(master, text=text, width=width, height=height, command=command, **kwargs)
 
 class aCheckBox(ctk.CTkCheckBox):
-    def __init__(self,master,boolean_value:bool):
+    def __init__(self,master,boolean_value:bool, **kwargs):
         if boolean_value:
             self.__bVar = BooleanVar(master,value=True)
         else :
             self.__bVar = BooleanVar(master,value=True)
-        super().__init__(master,variable=self.__bVar,text="Arrera CheckBox")
+        super().__init__(master,variable=self.__bVar,text="Arrera CheckBox", **kwargs)
 
     def getBooleanVar(self):
         return self.__bVar
@@ -51,14 +51,14 @@ class aRadioButton(ctk.CTkRadioButton):
         super().__init__(master, text=text, variable=variable, value=value, command=command, **kwargs)
 
 class aEntry(ctk.CTkEntry):
-    def __init__(self,master,police_size:int=15,width:int=20):
-        super().__init__(master)
+    def __init__(self,master,police_size:int=15,width:int=20, **kwargs):
+        super().__init__(master, **kwargs)
         self.configure(font=("Roboto",police_size,"bold"))
         self.configure(width=width)
 
 class aText(ctk.CTkTextbox):
-    def __init__(self,master,police_size:int=15,center:bool=False):
-        super().__init__(master)
+    def __init__(self,master,police_size:int=15,center:bool=False, **kwargs):
+        super().__init__(master, **kwargs)
         self.configure(font=("Roboto",police_size,"normal"))
 
         if center:
@@ -131,10 +131,10 @@ class aEntryLengend(ctk.CTkFrame):
         self.__label.configure(font=font)
 
 class aOptionMenu(ctk.CTkOptionMenu):
-    def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str="",width:int=200):
+    def __init__(self,master,value:list,police_size:int=15,bg:str="",fg:str="",width:int=200, **kwargs):
         self.__var = StringVar()
 
-        super().__init__(master,values=value,variable=self.__var)
+        super().__init__(master,values=value,variable=self.__var, **kwargs)
 
         if bg != "":
             self.configure(fg_color=bg)
@@ -261,7 +261,7 @@ class aCanvas(ctk.CTkCanvas):
         super().__init__(master)
 
 class aBackgroundImage(ctk.CTkFrame):
-    def __init__(self,master,background_light:str,background_dark:str="",height:int = 600,width:int = 800):
+    def __init__(self,master,background_light:str,background_dark:str="",height:int = 600,width:int = 800, **kwargs):
         if background_dark != "":
             background = ctk.CTkImage(light_image=Image.open(resource_path(background_light)),
                                       dark_image=Image.open(resource_path(background_light)),
@@ -271,7 +271,7 @@ class aBackgroundImage(ctk.CTkFrame):
                                       dark_image=Image.open(resource_path(background_dark)),
                                       size=(width, height))
         self.__size = (width,height)
-        super().__init__(master)
+        super().__init__(master, **kwargs)
         self.configure(width=width,height=height)
         self.configure(border_width=0)
 
@@ -294,8 +294,8 @@ class aBackgroundImage(ctk.CTkFrame):
 # Fenetre
 
 class aTk(ctk.CTk):
-    def __init__(self, title: str = "ArreraTK", width: int = 800, height: int = 600, resizable: bool = False, icon: str = "",theme_file:str="theme/theme_material3.json"):
-        super().__init__()
+    def __init__(self, title: str = "ArreraTK", width: int = 800, height: int = 600, resizable: bool = False, icon: str = "",theme_file:str="theme/theme_material3.json", **kwargs):
+        super().__init__(**kwargs)
         try :
             ctk.set_default_color_theme(resource_path(theme_file))
         except :
@@ -314,8 +314,8 @@ class aTk(ctk.CTk):
                 self.iconphoto(True, PhotoImage(file=icon))
 
 class aTopLevel(ctk.CTkToplevel):
-    def __init__(self, title: str = "Arrera TopLevel", width: int = 400, height: int = 300, resizable: bool = False, icon: str = ""):
-        super().__init__()
+    def __init__(self, title: str = "Arrera TopLevel", width: int = 400, height: int = 300, resizable: bool = False, icon: str = "", **kwargs):
+        super().__init__(**kwargs)
         
         self.geometry(f"{width}x{height}")
         self.title(title)
