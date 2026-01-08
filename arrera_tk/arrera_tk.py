@@ -419,7 +419,8 @@ class aTk(ctk.CTk):
         super().__init__(**kwargs)
         try :
             ctk.set_default_color_theme(resource_path(theme_file))
-        except :
+        except Exception as e:
+            print(e)
             ctk.set_default_color_theme("dark-blue")
 
         self.geometry(f"{width}x{height}")
