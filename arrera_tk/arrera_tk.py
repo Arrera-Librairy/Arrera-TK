@@ -8,7 +8,7 @@ import sys
 
 from customtkinter import CTkCanvas
 
-VERSIONARRERATK = "2.0.0"
+VERSIONARRERATK = "2.0.1"
 
 # Fonction pour gerer les resource sur mac os
 def resource_path(relative_path):
