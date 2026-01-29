@@ -5,6 +5,7 @@ import webbrowser as wb
 import platform
 import os
 import sys
+from typing import Union, Callable
 
 from customtkinter import CTkCanvas
 
@@ -19,7 +20,6 @@ def resource_path(relative_path):
         return os.path.join(os.path.abspath("."), relative_path)
     else:
         return relative_path
-
 
 # Class de placement custome
 
@@ -661,3 +661,20 @@ def packBottom(widget, xExpand: bool = False, yExpand: bool = False):
         widget.pack(expand=True, fill="y", side="bottom")
     else:
         widget.pack(side="bottom")
+
+# Objet pour gerer les touche de clavier
+
+class keyboad_manager:
+    def __init__(self,master:Union[aTk,aTopLevel]):
+        self.__dict_key_fonction = {}# Shema key:fonction
+        self.__w = master
+
+    def __gest_keyboad(self, event):
+        if event.keycode in self.__dict_key_fonction:
+            self.__dict_key_fonction[event.keycode]()
+
+    def add_key(self,key:int,fonction:Callable):
+        if not self.__dict_key_fonction:
+            self.__w.bind("<Key>",self.__gest_keyboad)
+
+        self.__dict_key_fonction[key] = fonction
