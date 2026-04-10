@@ -7,9 +7,9 @@ import os
 import sys
 from typing import Union, Callable
 
-from customtkinter import CTkCanvas
+from customtkinter import CTkCanvas, CTkImage
 
-VERSIONARRERATK = "2.0.3"
+VERSIONARRERATK = "2.1.0"
 
 
 # Fonction pour gerer les resource sur mac os
@@ -116,7 +116,7 @@ class aImage(ctk.CTkImage):
 
 class aLabel(placement_Tool_Kit_internet, ctk.CTkLabel):
     def __init__(self, master, text: str = "Arrera Label", police_size: int = 0, dark_color: str = "",
-                 light_color: str = "", light_text_color: str = "", dark_text_color: str = "", **kwargs):
+                 light_color: str = "", light_text_color: str = "", dark_text_color: str = "",image : CTkImage = None, **kwargs):
         super().__init__(master, text=text, **kwargs)
         if police_size != 0:
             self.configure(font=("Roboto", police_size, "bold"))
@@ -127,6 +127,8 @@ class aLabel(placement_Tool_Kit_internet, ctk.CTkLabel):
         if dark_text_color != "" and light_text_color != "":
             self.configure(text_color=(light_text_color, dark_text_color))
 
+        if image is not None:
+            self.configure(image=image,text="")
 
 class aButton(placement_Tool_Kit_internet, ctk.CTkButton):
     def __init__(self, master, text: str = "Arrera Button", width: int = 140, height: int = 40, command=None,
@@ -199,13 +201,15 @@ class aText(placement_Tool_Kit_internet, ctk.CTkTextbox):
 
 
 class aTextScrollable(placement_Tool_Kit_internet, ctk.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master,police_size: int = 15):
         super().__init__(master)
         self.configure(border_width=0)
 
         self.__textbox = ctk.CTkTextbox(self, wrap="word", state="disabled")
         scrollbar = ctk.CTkScrollbar(self, command=self.__textbox.yview)
         self.__textbox.configure(yscrollcommand=scrollbar.set)
+
+        self.__textbox.configure(font=("Roboto", police_size, "normal"))
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -300,6 +304,9 @@ class aOptionMenu(placement_Tool_Kit_internet, ctk.CTkOptionMenu):
     def changePolice(self, font: (str, int, str) = ("Roboto", 15, "bold")):
         self.configure(font=font)
 
+    def set_text(self, text: str):
+        self.__var.set(text)
+
 
 class aOptionMenuLengend(placement_Tool_Kit_internet, ctk.CTkFrame):
     def __init__(self, master, values: list, text: str = "Arrera OptionMenu Legend", bg: str = "", fg: str = "",
@@ -346,15 +353,22 @@ class aOptionMenuLengend(placement_Tool_Kit_internet, ctk.CTkFrame):
     def changeTextLabel(self, text: str):
         self.__label.configure(text=text)
 
+    def set_text(self, text: str):
+        self.__optionMenu.set_text(text)
+
     def changePoliceLabel(self, font: (str, int, str) = ("Roboto", 15, "bold")):
         self.__label.configure(font=font)
 
 
 class aHourPickers(placement_Tool_Kit_internet, ctk.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
+    def __init__(self, master,minute_pickers:bool = False, **kwargs):
+        super().__init__(master,fg_color=master.cget("fg_color"),**kwargs)
 
-        hours = [f"{h:02d}" for h in range(24)]
+        if not minute_pickers:
+            hours = [f"{h:02d}" for h in range(24)]
+        else :
+            hours = [f"{h:02d}" for h in range(60)]
+
         minutes = [f"{m:02d}" for m in range(60)]
 
         self.__hour = aOptionMenu(self, value=hours, width=10)
@@ -371,6 +385,12 @@ class aHourPickers(placement_Tool_Kit_internet, ctk.CTkFrame):
 
     def getValueMinute(self):
         return self.__minute.getValue()
+
+    def setValueMinute(self, minute:str):
+        self.__minute.set(minute)
+
+    def setValueHour(self,hour:str):
+        self.__hour.set(hour)
 
 
 class aSwicht(placement_Tool_Kit_internet, ctk.CTkSwitch):
