@@ -28,17 +28,17 @@ test_placement_active = False
 
 theme = ""
 dictTheme = {
-    "default": "theme/theme_default.json",
-    "Blanc/Gris": "theme/theme_blanc_gris.json",
-    "Bleu/Blanc": "theme/theme_bleu_blanc.json",
-    "Bleu/Violet": "theme/theme_bleu_violet.json",
-    "orange": "theme/theme_orange.json",
-    "rouge": "theme/theme_rouge.json",
-    "rose": "theme/theme_rose.json",
-    "bleu": "theme/theme_bleu.json",
-    "jaune": "theme/theme_jaune.json",
-    "blanc": "theme/theme_blanc.json",
-    "gris": "theme/theme_gris.json"
+    "default": "tests/theme/theme_default.json",
+    "Blanc/Gris": "tests/theme/theme_blanc_gris.json",
+    "Bleu/Blanc": "tests/theme/theme_bleu_blanc.json",
+    "Bleu/Violet": "tests/theme/theme_bleu_violet.json",
+    "orange": "tests/theme/theme_orange.json",
+    "rouge": "tests/theme/theme_rouge.json",
+    "rose": "tests/theme/theme_rose.json",
+    "bleu": "tests/theme/theme_bleu.json",
+    "jaune": "tests/theme/theme_jaune.json",
+    "blanc": "tests/theme/theme_blanc.json",
+    "gris": "tests/theme/theme_gris.json"
 }
 
 
@@ -93,7 +93,7 @@ def gestion():
         frame.pack()
 
     if about_active:
-        img_path = os.path.join(os.path.dirname(__file__), '../image/test.png')
+        img_path = "tests/image/test.png"
         windows_about("ArreraTK Teste",
                       img_path,
                       "I2026",
@@ -126,8 +126,8 @@ def gestion():
         canvas.pack()
 
     if backgroundimage_active:
-        img_path1 = os.path.join(os.path.dirname(__file__), '../image/test.png')
-        img_path2 = os.path.join(os.path.dirname(__file__), '../image/test2.png')
+        img_path1 = 'tests/image/test.png'
+        img_path2 = 'tests/image/test-2.png'
         bimage = aBackgroundImage(w, img_path1, img_path2)
         bimage.pack()
 
