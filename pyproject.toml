@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "arrera-tk"
-version = "2.1.0"
+version = "3.00"
 authors = [
   { name="Baptiste", email="arrera-software@gmail.com" },
 ]

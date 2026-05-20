@@ -1,4 +1,9 @@
-VERSIONARRERATK = "2.1.0"
+import importlib.metadata
+
+try:
+    VERSIONARRERATK = importlib.metadata.version("arrera-tk")
+except importlib.metadata.PackageNotFoundError:
+    VERSIONARRERATK = "0.0.0-local"
 
 from .utils import (
     resource_path, placeLeftTop, placeRightTop, placeLeftBottom, placeRightBottom,
