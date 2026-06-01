@@ -36,6 +36,7 @@ from .aTk import aTk
 from .aTopLevel import aTopLevel
 from .windows_about import windows_about
 from .keyboad_manager import keyboad_manager
+from .theme import *
 
 __all__ = [
     "VERSIONARRERATK",
@@ -67,5 +68,16 @@ __all__ = [
     "aTk",
     "aTopLevel",
     "windows_about",
-    "keyboad_manager"
+    "keyboad_manager",
+    "theme_defaut",
+    "theme_blanc",
+    "theme_blanc_gris",
+    "theme_bleu",
+    "theme_bleu_blanc",
+    "theme_bleu_violet",
+    "theme_gris",
+    "theme_jaune",
+    "theme_orange",
+    "theme_rose",
+    "theme_rouge"
 ]

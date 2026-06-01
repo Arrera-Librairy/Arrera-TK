@@ -1,6 +1,10 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath("src"))
+
 from arrera_tk import *
 from PIL import Image
-import os
 
 # Create the main window
 win = aTk(title="Arrera TK Widgets Showcase")
