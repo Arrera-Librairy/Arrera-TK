@@ -73,7 +73,8 @@ try:
         img = Image.new('RGB', (100, 50), color = 'gray')
         img.save('test-image/placeholder.png')
     
-    aImage(main_frame, "test-image/placeholder.png", size=(100, 50)).pack(pady=5)
+    img = aImage(path_light="test-image/placeholder.png",width=100, height=50)
+    aLabel(main_frame,image=img).pack(pady=5)
 except Exception as e:
     print(f"Could not load image for aImage: {e}")
     aLabel(main_frame, text="aImage (placeholder not found)").pack(pady=5)
