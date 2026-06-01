@@ -1,276 +1,97 @@
-import sys
+from arrera_tk import *
+from PIL import Image
 import os
 
-# Ajout du dossier src au sys.path pour pouvoir importer arrera_tk localement sans l'installer via pip
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+# Create the main window
+win = aTk(title="Arrera TK Widgets Showcase")
 
-from arrera_tk import *
+# Create a scrollable frame to hold the widgets
+main_frame = aScrollableFrame(win)
+main_frame.pack(fill="both", expand=True)
 
-topLevel_active = False
-button_active = False
-label_active = False
-frame_active = False
-about_active = False
-entry_active = False
-text_box_active = False
-checkbox_active = False
-radio_button_active = False
-scrollableframe_active = False
-canvas_active = False
-backgroundimage_active = False
-textbox_scroll_active = False
-entry_legend_active = False
-optionmenu_active = False
-optionmenu_legend_active = False
-hour_pickers_active = False
-swicht_active = False
-test_placement_active = False
+# --- Widget Showcase ---
 
-theme = ""
-dictTheme = {
-    "default": "tests/theme/theme_default.json",
-    "Blanc/Gris": "tests/theme/theme_blanc_gris.json",
-    "Bleu/Blanc": "tests/theme/theme_bleu_blanc.json",
-    "Bleu/Violet": "tests/theme/theme_bleu_violet.json",
-    "orange": "tests/theme/theme_orange.json",
-    "rouge": "tests/theme/theme_rouge.json",
-    "rose": "tests/theme/theme_rose.json",
-    "bleu": "tests/theme/theme_bleu.json",
-    "jaune": "tests/theme/theme_jaune.json",
-    "blanc": "tests/theme/theme_blanc.json",
-    "gris": "tests/theme/theme_gris.json"
-}
+# aLabel
+aLabel(main_frame, text="aLabel Widget").pack(pady=5)
 
+# aButton
+aButton(main_frame, text="aButton").pack(pady=5)
 
-def checkSwictBTN(s: aSwicht):
-    print(s.getValue())
+# aCheckBox
+aCheckBox(main_frame,boolean_value=True).pack(pady=5)
 
+# aRadioButton
+aRadioButton(main_frame, text="aRadioButton").pack(pady=5)
 
-def setTheme():
-    global theme, dictTheme
+# aEntry
+aEntry(main_frame, placeholder_text="aEntry").pack(pady=5)
 
-    print("Choix du theme d'Arrera TK")
+# aText
+text_widget = aText(main_frame, height=4)
+text_widget.insert("0.0", "aText Widget")
+text_widget.pack(pady=5, padx=10)
 
-    var = 1
+# aTextScrollable
+scroll_text = aTextScrollable(main_frame)
+scroll_text.getTextBox().insert("0.0", "aTextScrollable Widget\\n" * 5)
+scroll_text.pack(pady=5, padx=10)
 
-    ok = False
-    while not ok:
-        try:
-            var = int(input(
-                "1.Blanc/Gris\n2.Bleu/Blanc\n3.Bleu/Violet\n4.Orange\n5.Rouge\n6.Rose\n7.Bleu\n8.Jaune\n9.Blanc\n10.Gris"
-                "\n0.Theme par default\n# "))
-            ok = True
-        except ValueError:
-            print("Valeur invalide")
-            ok = False
+# aEntryLengend
+aEntryLengend(main_frame, text="aEntryLengend").pack(pady=10)
 
-    theme = list(dictTheme.keys())[var]
+# aOptionMenu
+options = ["Option 1", "Option 2", "Option 3"]
+aOptionMenu(main_frame, value=options).pack(pady=5)
 
+# aOptionMenuLengend
+aOptionMenuLengend(main_frame, text="aOptionMenuLengend", values=options).pack(pady=10)
 
-def gestion():
-    global topLevel_active, button_active, label_active, frame_active, about_active, entry_active, text_box_active, \
-        checkbox_active, radio_button_active, scrollableframe_active, canvas_active, backgroundimage_active, textbox_scroll_active, \
-        entry_legend_active, optionmenu_active, optionmenu_legend_active, hour_pickers_active, swicht_active, test_placement_active, theme, dictTheme
+# aHourPickers
+aHourPickers(main_frame).pack(pady=5)
 
-    # Modification des chemins relatifs pour le test depuis le dossier tests
-    theme_file_path = os.path.join(os.path.dirname(__file__), '../', dictTheme[theme])
-    w = aTk(title="Teste Arrera TK", theme_file=theme_file_path)
+# aSwicht
+aSwicht(main_frame, text="aSwicht").pack(pady=5)
 
-    if label_active:
-        label = aLabel(w, text="Super label")
-        label.pack(pady=20)
+# aFrame
+frame = aFrame(main_frame, height=50, width=200)
+frame.pack(pady=5)
+aLabel(frame, text="Inside aFrame").place(relx=0.5, rely=0.5, anchor="center")
 
-    if button_active:
-        btn = aButton(w, text="Super bouton")
-        btn.pack(pady=20)
+# aCanvas
+canvas = aCanvas(main_frame)
+canvas.create_line(0, 0, 200, 50, fill="red", width=3)
+canvas.pack(pady=5)
 
-    if topLevel_active:
-        topLevel = aTopLevel(title="Fenêtre secondaire")
-
-    if frame_active:
-        frame = aFrame(w, fg_color="red")
-        aButton(frame, text="btn Frame").place(x=0, y=0)
-        frame.pack()
-
-    if about_active:
-        img_path = "tests/image/test.png"
-        windows_about("ArreraTK Teste",
-                      img_path,
-                      "I2026",
-                      "MOI",
-                      "www.arrera-software.fr",
-                      "www.google.com")
-    if entry_active:
-        entry = aEntry(w)
-        entry.pack()
-
-    if text_box_active:
-        text = aText(w, center=True)
-        text.pack()
-
-    if checkbox_active:
-        checkbox = aCheckBox(w, True)
-        print("Checkbox : ", checkbox.getBooleanVar)
-        checkbox.pack()
-
-    if radio_button_active:
-        radio = aRadioButton(w)
-        radio.pack()
-
-    if scrollableframe_active:
-        scrollableframe = aScrollableFrame(w)
-        scrollableframe.pack()
-
-    if canvas_active:
-        canvas = aCanvas(w)
-        canvas.pack()
-
-    if backgroundimage_active:
-        img_path1 = 'tests/image/test.png'
-        img_path2 = 'tests/image/test-2.png'
-        bimage = aBackgroundImage(w, img_path1, img_path2)
-        bimage.pack()
-
-    if textbox_scroll_active:
-        textbox_scroll = aTextScrollable(w)
-        textbox_scroll.enableTextBox()
-        textbox_scroll.pack()
-
-    if entry_legend_active:
-        entry_legend = aEntryLengend(w)
-        entry_legend.pack()
-
-    if optionmenu_active:
-        super_list = ["Option 1", "Option 2", "Option 3"]
-        optionmenu = aOptionMenu(w, value=super_list)
-        optionmenu.pack()
-        print(optionmenu.getValue())
-
-    if optionmenu_legend_active:
-        super_list = ["Option 1", "Option 2", "Option 3"]
-        optionmenu_legend = aOptionMenuLengend(w, values=super_list)
-        optionmenu_legend.pack()
-        print(optionmenu_legend.getValue())
-
-    if hour_pickers_active:
-        hour_pickers = aHourPickers(w)
-        hour_pickers.pack()
-
-    if swicht_active:
-        swicht = aSwicht(w, command=lambda: checkSwictBTN(swicht))
-        swicht.pack()
-
-    if test_placement_active:
-        aLabel(w, text="Haut gauche").placeTopLeft()
-        aLabel(w, text="Haut droite").placeTopRight()
-        aLabel(w, text="Bas gauche").placeBottomLeft()
-        aLabel(w, text="Bas droite").placeBottomRight()
-        aLabel(w, text="Centre").placeCenter()
-        aLabel(w, text="Centre gauche").placeLeftCenter()
-        aLabel(w, text="Centre droite").placeRightCenter()
-        aLabel(w, text="Haut centre").placeTopCenter()
-        aLabel(w, text="Bas centre").placeBottomCenter()
-        aLabel(w, text="Center on width").placeCenterOnWidth(y=30)
-        aLabel(w, text="placeWidgetCenteredAtBottom").placeWidgetCenteredAtBottom(x_offset=15)
-        aLabel(w, text="En bas a droite").placeBottomRight()
-        aLabel(w, text="En bas a gauche").placeBottomLeft()
-        aLabel(w, text="En haut a droite").placeTopRight()
-
-    w.mainloop()
+# aImage (requires a placeholder image)
+try:
+    # Create a dummy image if none exists
+    if not os.path.exists("test-image/placeholder.png"):
+        img = Image.new('RGB', (100, 50), color = 'gray')
+        img.save('test-image/placeholder.png')
+    
+    aImage(main_frame, "test-image/placeholder.png", size=(100, 50)).pack(pady=5)
+except Exception as e:
+    print(f"Could not load image for aImage: {e}")
+    aLabel(main_frame, text="aImage (placeholder not found)").pack(pady=5)
 
 
-def main():
-    global topLevel_active, button_active, label_active, frame_active, about_active, entry_active, text_box_active, \
-        checkbox_active, radio_button_active, scrollableframe_active, canvas_active, backgroundimage_active, textbox_scroll_active, \
-        entry_legend_active, optionmenu_active, optionmenu_legend_active, hour_pickers_active, swicht_active, test_placement_active
+# --- Toplevel and About Windows ---
 
-    setTheme()
+def open_toplevel():
+    top = aTopLevel(title="Top Level Window")
+    aLabel(top, text="This is a TopLevel window").pack(padx=20, pady=20)
 
-    print("Menu texte Arrera TK\n")
-    var = 1
-    while var != 0:
-        ok = False
-        while not ok:
-            try:
-                var = int(input("1.TopLevel\n2.Button\n"
-                                "3.Label\n4.Frame\n"
-                                "5.A Propos\n6.Entry\n"
-                                "7.TextBox\n8.Checkbox\n"
-                                "9.RadioButton\n10.ScrollableFrame\n"
-                                "11.Canvas\n12.Background Image\n"
-                                "13.Text Box Scroll\n14.Entry Lengend\n"
-                                "15.Option Menu\n16.Option Menu Lengend\n"
-                                "17.Hour pickers\n18.Swicht\n"
-                                "19.Test Placement\n"
-                                "0.Lancer\n# "))
-                ok = True
-            except ValueError:
-                print("Valeur invalide")
-                ok = False
+def open_about():
+    windows_about(nameSoft="Arrera Tk About",
+                      iconFile='test-image/test.png',
+                      version="3.0.0",
+                      copyright="rien",
+                      linkWeb="www.arrera-software.fr",
+                      linkSource="www.arrera-software.fr")
 
-        match (var):
-            case 1:
-                topLevel_active = True
-                print("TopLevel Activé")
-            case 2:
-                button_active = True
-                print("Button Activé")
-            case 3:
-                label_active = True
-                print("Label Activé")
-            case 4:
-                frame_active = True
-                print("Frame Activer")
-            case 5:
-                about_active = True
-                print("About Activer")
-            case 6:
-                entry_active = True
-                print("Entry Activer")
-            case 7:
-                text_box_active = True
-                print("Text Box Activer")
-            case 8:
-                checkbox_active = True
-                print("Checkbox Activer")
-            case 9:
-                radio_button_active = True
-                print("RadioButton Activer")
-            case 10:
-                scrollableframe_active = True
-                print("ScrollableFrame Activer")
-            case 11:
-                canvas_active = True
-                print("Canvas Activer")
-            case 12:
-                backgroundimage_active = True
-                print("Background Image Activer")
-            case 13:
-                textbox_scroll_active = True
-                print("Text Box Scroll Activer")
-            case 14:
-                entry_legend_active = True
-                print("Entry Legend Activer")
-            case 15:
-                optionmenu_active = True
-                print("Option Menu Activer")
-            case 16:
-                optionmenu_legend_active = True
-                print("Option Menu Legend Activer")
-            case 17:
-                hour_pickers_active = True
-                print("Hour Pickers Activer")
-            case 18:
-                swicht_active = True
-                print("Swicht Activer")
-            case 19:
-                test_placement_active = True
-                print("Test Placement Activer")
-            case 0:
-                print("Lancement de l'interface...")
-
-    gestion()
+aButton(main_frame, text="Open aTopLevel", command=open_toplevel).pack(pady=5)
+aButton(main_frame, text="Open About Window", command=open_about).pack(pady=5)
 
 
-if __name__ == "__main__":
-    main()
+# Start the main loop
+win.mainloop()
