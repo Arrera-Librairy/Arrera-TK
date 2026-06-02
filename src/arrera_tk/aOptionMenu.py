@@ -7,7 +7,7 @@ class aOptionMenu(placement_Tool_Kit_internet, ctk.CTkOptionMenu):
                  **kwargs):
         self.__var = StringVar()
 
-        super().__init__(master, values=value, variable=self.__var, **kwargs)
+        super().__init__(master, values=value, variable=self.__var,width=width, **kwargs)
 
         if bg != "":
             self.configure(fg_color=bg)
