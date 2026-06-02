@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Une librairie de widgets pour customtkinter."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -19,7 +19,7 @@ classifiers = [
 dependencies = [
     "customtkinter==5.2.2",
     "darkdetect==0.8.0",
-    "pillow",
+    "pillow==12.1.0",
 ]
 
 [project.urls]
