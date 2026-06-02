@@ -7,6 +7,22 @@ from tkinter import PhotoImage
 from .utils import resource_path
 from .theme import *
 
+dict_themes = {
+            "defaut": theme_defaut,
+            "blanc": theme_blanc,
+            "blanc-gris": theme_blanc_gris,
+            "bleu": theme_bleu,
+            "bleu-blanc": theme_bleu_blanc,
+            "bleu-violet": theme_bleu_violet,
+            "gris": theme_gris,
+            "jaune": theme_jaune,
+            "orange": theme_orange,
+            "rose": theme_rose,
+            "rouge": theme_rouge
+        }
+
+list_theme = list(dict_themes.keys())
+
 class aTk(ctk.CTk):
     _theme_cache = {}
 
@@ -41,24 +57,10 @@ class aTk(ctk.CTk):
         return theme_cache[cache_key]
 
     def __apply_theme(self, theme_name: str):
-        themes = {
-            "defaut": theme_defaut,
-            "blanc": theme_blanc,
-            "blanc-gris": theme_blanc_gris,
-            "bleu": theme_bleu,
-            "bleu-blanc": theme_bleu_blanc,
-            "bleu-violet": theme_bleu_violet,
-            "gris": theme_gris,
-            "jaune": theme_jaune,
-            "orange": theme_orange,
-            "rose": theme_rose,
-            "rouge": theme_rouge
-        }
-        
         if isinstance(theme_name, dict):
             ctk.set_default_color_theme(type(self).__theme_dict_to_path(theme_name))
-        elif theme_name in themes:
-            ctk.set_default_color_theme(type(self).__theme_dict_to_path(themes[theme_name]))
+        elif theme_name in dict_themes:
+            ctk.set_default_color_theme(type(self).__theme_dict_to_path(dict_themes[theme_name]))
         elif os.path.exists(theme_name):
              try:
                 ctk.set_default_color_theme(resource_path(theme_name))

@@ -32,7 +32,7 @@ from .aFrame import aFrame
 from .aScrollableFrame import aScrollableFrame
 from .aCanvas import aCanvas
 from .aBackgroundImage import aBackgroundImage
-from .aTk import aTk
+from .aTk import aTk, list_theme
 from .aTopLevel import aTopLevel
 from .windows_about import windows_about
 from .keyboad_manager import keyboad_manager
@@ -79,5 +79,6 @@ __all__ = [
     "theme_jaune",
     "theme_orange",
     "theme_rose",
-    "theme_rouge"
+    "theme_rouge",
+    "list_theme"
 ]
