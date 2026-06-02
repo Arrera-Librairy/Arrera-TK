@@ -2,8 +2,8 @@ from tkinter import messagebox
 from arrera_tk import *
 
 class arreratk_demo(aTk):
-    def __init__(self):
-        super().__init__(title="ArreraTK Demon", width=800, height=600)
+    def __init__(self,theme:str="defaut"):
+        super().__init__(title="ArreraTK Demon", width=800, height=600,theme=theme)
 
         # Le ScrollableFrame prend toute la place
         scroll_frame = aScrollableFrame(self)
