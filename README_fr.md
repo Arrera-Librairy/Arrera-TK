@@ -6,35 +6,57 @@ Arrera TK est une librairie Python utilisant Tkinter et CustomTkinter, avec un t
 
 ## Thèmes disponibles avec la librairie
 
-- blanc  
-- bleu/gris  
-- bleu  
-- bleu/blanc  
-- bleu/violet  
-- gris  
-- jaune  
-- orange  
-- rose  
-- rouge  
+- `defaut` (Thème par défaut)
+- `blanc`
+- `blanc-gris`
+- `bleu`
+- `bleu-blanc`
+- `bleu-violet`
+- `gris`
+- `jaune`
+- `orange`
+- `rose`
+- `rouge`
 
 ## Explication du fonctionnement des thèmes
 
-Pour utiliser un thème d’Arrera TK, il faut choisir le thème que vous voulez utiliser, le mettre dans un dossier de votre projet et indiquer son emplacement dans l’objet de la création de la fenêtre principale (`aTk` avec l’argument `theme_file`).  
-Par défaut, si vous ne mettez pas de thème, le programme ira chercher son thème par défaut à l’emplacement `theme/theme_default.json`.
+Pour utiliser un thème d'Arrera TK, il suffit de passer son nom en argument lors de la création de la fenêtre principale `aTk`.
+
+```python
+# Exemple d'utilisation d'un thème
+app = aTk(theme="bleu") 
+```
+
+Par défaut, si aucun thème n'est spécifié, le thème `defaut` sera utilisé. Il est également toujours possible de charger un thème personnalisé depuis un fichier `.json` en passant le chemin du fichier à l'argument `theme`.
+
+## Installation
+
+### Via PyPI (Recommandé)
+
+Pour utiliser Arrera TK, installez le paquet via pip :
+
+```bash
+pip install arrera-tk
+```
+
+### Depuis le dépôt GitHub (Version de développement)
+
+Si vous souhaitez utiliser la dernière version de développement, vous pouvez installer la librairie directement depuis GitHub :
+
+```bash
+pip install git+https://github.com/Arrera-Software/Arrera-TK.git
+```
 
 ## Utilisation
 
-Pour utiliser Arrera TK, téléchargez le fichier `arrera_tk.py` et importez-le dans votre projet. Installez les dépendances présentes dans le fichier `requirements.txt` en utilisant la commande suivante :
-
-```bash
-pip install -r requirements.txt
-```
-Et enfin, importer le module dans votre projet :
+Importez les classes nécessaires dans votre projet :
 ```python
-from arrera_tk import *
+from arrera_tk import aTk, aButton, aLabel
+# Ou importez tout le module (non recommandé pour les gros projets)
+# from arrera_tk import *
 ```
 
-## Details des methode 
+## Détails des méthodes 
 
 ### Widgets
 
@@ -50,6 +72,7 @@ from arrera_tk import *
 *   **aOptionMenuLengend** : Menu déroulant accompagné d'un label descriptif.
 *   **aHourPickers** : Sélecteur d'heure et de minutes.
 *   **aSwicht** : Interrupteur on/off.
+*   **aImage** : Widget pour afficher des images, avec support pour les thèmes clair et sombre.
 
 ### Conteneurs (Frames)
 
@@ -63,6 +86,10 @@ from arrera_tk import *
 *   **aTk** : Fenêtre principale de l'application. Gère le thème et l'icône.
 *   **aTopLevel** : Fenêtre secondaire.
 *   **windows_about** : Fenêtre "À propos" pré-configurée.
+
+### Utilitaires
+
+*   **keyboad_manager** : Utilitaire pour gérer les événements clavier (associer des fonctions à des touches).
 
 ### Placement
 

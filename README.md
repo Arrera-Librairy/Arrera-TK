@@ -6,32 +6,54 @@ Arrera TK is a Python library using Tkinter and CustomTkinter, with a custom the
 
 ## Themes available with the library
 
-- white
-- blue/grey
-- blue
-- blue/white
-- blue/purple
-- grey
-- yellow
-- orange
-- pink
-- red
+- `defaut` (Default theme)
+- `blanc`
+- `blanc-gris`
+- `bleu`
+- `bleu-blanc`
+- `bleu-violet`
+- `gris`
+- `jaune`
+- `orange`
+- `rose`
+- `rouge`
 
 ## Explanation of how themes work
 
-To use an Arrera TK theme, you must choose the theme you want to use, place it in a folder in your project, and indicate its location in the main window creation object (`aTk` with the `theme_file` argument).
-By default, if you do not specify a theme, the program will look for its default theme at `theme/theme_default.json`.
+To use an Arrera TK theme, simply pass its name as an argument when creating the main `aTk` window.
+
+```python
+# Example of using a theme
+app = aTk(theme="bleu") 
+```
+
+By default, if no theme is specified, the `defaut` theme will be used. It is also still possible to load a custom theme from a `.json` file by passing the file path to the `theme` argument.
+
+## Installation
+
+### Via PyPI (Recommended)
+
+To use Arrera TK, install the package via pip:
+
+```bash
+pip install arrera-tk
+```
+
+### From the GitHub repository (Development version)
+
+If you want to use the latest development version, you can install the library directly from GitHub:
+
+```bash
+pip install git+https://github.com/Arrera-Software/Arrera-TK.git
+```
 
 ## Usage
 
-To use Arrera TK, download the `arrera_tk.py` file and import it into your project. Install the dependencies present in the `requirements.txt` file using the following command:
-
-```bash
-pip install -r requirements.txt
-```
-And finally, import the module into your project:
+Import the necessary classes into your project:
 ```python
-from arrera_tk import *
+from arrera_tk import aTk, aButton, aLabel
+# Or import the whole module (not recommended for large projects)
+# from arrera_tk import *
 ```
 
 ## Methods details
@@ -50,6 +72,7 @@ from arrera_tk import *
 *   **aOptionMenuLengend**: Dropdown menu accompanied by a descriptive label.
 *   **aHourPickers**: Hour and minute selector.
 *   **aSwicht**: On/off switch.
+*   **aImage**: Widget to display images, with support for light and dark themes.
 
 ### Containers (Frames)
 
@@ -63,6 +86,10 @@ from arrera_tk import *
 *   **aTk**: Main application window. Manages the theme and icon.
 *   **aTopLevel**: Secondary window.
 *   **windows_about**: Pre-configured "About" window.
+
+### Utilities
+
+*   **keyboad_manager**: Utility to manage keyboard events (associate functions with keys).
 
 ### Placement
 
