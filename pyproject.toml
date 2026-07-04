@@ -23,8 +23,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Arrera-Software/Arrera-TK"
-"Bug Tracker" = "https://github.com/Arrera-Software/Arrera-TK/issues"
+"Homepage" = "https://github.com/Arrera-Librairy/Arrera-TK"
+"Bug Tracker" = "https://github.com/Arrera-Librairy/Arrera-TK/issues"
 "Documentation" = "https://librairy.arrera-software.fr/arreratk"
 
 [tool.setuptools.packages.find]
