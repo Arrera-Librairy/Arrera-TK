@@ -1,5 +1,11 @@
 # Arrera-TK Documentation
 
+> [!IMPORTANT]
+> **Compatibility Note:** This library is exclusively compatible with **Python 3.14**.
+> 
+> **Dependency:** This library is built on top of `customtkinter`.
+
+
 ## Installation
 
 *(To be completed)*
