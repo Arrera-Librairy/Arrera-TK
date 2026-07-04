@@ -1,89 +1,116 @@
 # Arrera TK
 
-[English version](README_en.md)
+[French version](README_fr.md)
 
-Arrera TK est une librairie Python utilisant Tkinter et CustomTkinter, avec un thème personnalisé inspiré de Material 3 Expressive.
+Arrera TK is a Python library using Tkinter and CustomTkinter, with a custom theme inspired by Material 3 Expressive.
 
-## Thèmes disponibles avec la librairie
+## Themes available with the library
 
-- blanc  
-- bleu/gris  
-- bleu  
-- bleu/blanc  
-- bleu/violet  
-- gris  
-- jaune  
-- orange  
-- rose  
-- rouge  
+- `defaut` (Default theme)
+- `blanc`
+- `blanc-gris`
+- `bleu`
+- `bleu-blanc`
+- `bleu-violet`
+- `gris`
+- `jaune`
+- `orange`
+- `rose`
+- `rouge`
 
-## Explication du fonctionnement des thèmes
+## Explanation of how themes work
 
-Pour utiliser un thème d’Arrera TK, il faut choisir le thème que vous voulez utiliser, le mettre dans un dossier de votre projet et indiquer son emplacement dans l’objet de la création de la fenêtre principale (`aTk` avec l’argument `theme_file`).  
-Par défaut, si vous ne mettez pas de thème, le programme ira chercher son thème par défaut à l’emplacement `theme/theme_default.json`.
+To use an Arrera TK theme, simply pass its name as an argument when creating the main `aTk` window.
 
-## Utilisation
+```python
+# Example of using a theme
+app = aTk(theme="bleu") 
+```
 
-Pour utiliser Arrera TK, téléchargez le fichier `arrera_tk.py` et importez-le dans votre projet. Installez les dépendances présentes dans le fichier `requirements.txt` en utilisant la commande suivante :
+By default, if no theme is specified, the `defaut` theme will be used. It is also still possible to load a custom theme from a `.json` file by passing the file path to the `theme` argument.
+
+## Installation
+
+### Via PyPI (Recommended)
+
+To use Arrera TK, install the package via pip:
 
 ```bash
-pip install -r requirements.txt
-```
-Et enfin, importer le module dans votre projet :
-```python
-from arrera_tk import *
+pip install arrera-tk
 ```
 
-## Details des methode 
+### From the GitHub repository (Development version)
+
+If you want to use the latest development version, you can install the library directly from GitHub:
+
+```bash
+pip install git+https://github.com/Arrera-Software/Arrera-TK.git
+```
+
+## Usage
+
+Import the necessary classes into your project:
+```python
+from arrera_tk import aTk, aButton, aLabel
+# Or import the whole module (not recommended for large projects)
+# from arrera_tk import *
+```
+
+## Methods details
 
 ### Widgets
 
-*   **aLabel** : Label basique.
-*   **aButton** : Bouton standard.
-*   **aCheckBox** : Case à cocher.
-*   **aRadioButton** : Bouton radio.
-*   **aEntry** : Champ de saisie de texte.
-*   **aText** : Zone de texte multiligne.
-*   **aTextScrollable** : Zone de texte avec barre de défilement.
-*   **aEntryLengend** : Champ de saisie accompagné d'un label descriptif.
-*   **aOptionMenu** : Menu déroulant.
-*   **aOptionMenuLengend** : Menu déroulant accompagné d'un label descriptif.
-*   **aHourPickers** : Sélecteur d'heure et de minutes.
-*   **aSwicht** : Interrupteur on/off.
+*   **aLabel**: Basic label.
+*   **aButton**: Standard button.
+*   **aCheckBox**: Checkbox.
+*   **aRadioButton**: Radio button.
+*   **aEntry**: Text entry field.
+*   **aText**: Multiline text area.
+*   **aTextScrollable**: Text area with scrollbar.
+*   **aEntryLengend**: Entry field accompanied by a descriptive label.
+*   **aOptionMenu**: Dropdown menu.
+*   **aOptionMenuLengend**: Dropdown menu accompanied by a descriptive label.
+*   **aHourPickers**: Hour and minute selector.
+*   **aSwicht**: On/off switch.
+*   **aImage**: Widget to display images, with support for light and dark themes.
 
-### Conteneurs (Frames)
+### Containers (Frames)
 
-*   **aFrame** : Conteneur simple avec coins arrondis.
-*   **aScrollableFrame** : Conteneur avec défilement.
-*   **aCanvas** : Zone de dessin.
-*   **aBackgroundImage** : Conteneur avec une image en arrière-plan.
+*   **aFrame**: Simple container with rounded corners.
+*   **aScrollableFrame**: Container with scrolling.
+*   **aCanvas**: Drawing area.
+*   **aBackgroundImage**: Container with a background image.
 
-### Fenêtres
+### Windows
 
-*   **aTk** : Fenêtre principale de l'application. Gère le thème et l'icône.
-*   **aTopLevel** : Fenêtre secondaire.
-*   **windows_about** : Fenêtre "À propos" pré-configurée.
+*   **aTk**: Main application window. Manages the theme and icon.
+*   **aTopLevel**: Secondary window.
+*   **windows_about**: Pre-configured "About" window.
+
+### Utilities
+
+*   **keyboad_manager**: Utility to manage keyboard events (associate functions with keys).
 
 ### Placement
 
-Les widgets héritent de méthodes facilitant leur positionnement.
+Widgets inherit methods facilitating their positioning.
 
 #### Place
-Ces méthodes utilisent `place()` avec des coordonnées relatives pour positionner les éléments.
+These methods use `place()` with relative coordinates to position elements.
 
-*   **Centré** : `placeCenter()`
-*   **Coins** : `placeTopLeft()`, `placeTopRight()`, `placeBottomLeft()`, `placeBottomRight()`
-*   **Bords centrés** : `placeTopCenter()`, `placeBottomCenter()`, `placeLeftCenter()`, `placeRightCenter()`
-*   **Spécifique** :
-    *   `placeCenterOnWidth(y)` : Centre horizontalement à la position Y donnée.
-    *   `placeWidgetCenteredAtBottom(x_offset)` : Centre en bas avec un décalage X optionnel.
-    *   `placeLeftBottomNoStick()`, `placeRightBottomNoStick()`, `placeBottomCenterNoStick()` : Place en bas (gauche, droite ou centre) avec une marge de 10px pour ne pas coller au bord.
+*   **Centered**: `placeCenter()`
+*   **Corners**: `placeTopLeft()`, `placeTopRight()`, `placeBottomLeft()`, `placeBottomRight()`
+*   **Centered Edges**: `placeTopCenter()`, `placeBottomCenter()`, `placeLeftCenter()`, `placeRightCenter()`
+*   **Specific**:
+    *   `placeCenterOnWidth(y)`: Centers horizontally at the given Y position.
+    *   `placeWidgetCenteredAtBottom(x_offset)`: Centers at the bottom with an optional X offset.
+    *   `placeLeftBottomNoStick()`, `placeRightBottomNoStick()`, `placeBottomCenterNoStick()`: Places at the bottom (left, right, or center) with a 10px margin to avoid sticking to the edge.
 
 #### Pack
-Ces méthodes utilisent `pack()` pour empiler les éléments. Elles acceptent les arguments `xExpand` (bool) et `yExpand` (bool) pour gérer l'extension dans les directions correspondantes.
+These methods use `pack()` to stack elements. They accept `xExpand` (bool) and `yExpand` (bool) arguments to manage expansion in the corresponding directions.
 
-*   `pack(xExpand, yExpand)` : Pack standard.
-*   `packLeft(xExpand, yExpand)` : Pack aligné à gauche.
-*   `packRight(xExpand, yExpand)` : Pack aligné à droite.
-*   `packTop(xExpand, yExpand)` : Pack aligné en haut.
-*   `packBottom(xExpand, yExpand)` : Pack aligné en bas.
+*   `pack(xExpand, yExpand)`: Standard pack.
+*   `packLeft(xExpand, yExpand)`: Pack aligned to the left.
+*   `packRight(xExpand, yExpand)`: Pack aligned to the right.
+*   `packTop(xExpand, yExpand)`: Pack aligned to the top.
+*   `packBottom(xExpand, yExpand)`: Pack aligned to the bottom.

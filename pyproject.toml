@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arrera-tk"
+version = "3.00"
+authors = [
+  { name="Baptiste", email="arrera-software@gmail.com" },
+]
+description = "Une librairie de widgets pour customtkinter."
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "customtkinter==5.2.2",
+    "darkdetect==0.8.0",
+    "pillow==12.1.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Arrera-Software/Arrera-TK"
+"Bug Tracker" = "https://github.com/Arrera-Software/Arrera-TK/issues"
+"Documentation" = "https://librairy.arrera-software.fr/arreratk"
+
+[tool.setuptools.packages.find]
+where = ["src"]
