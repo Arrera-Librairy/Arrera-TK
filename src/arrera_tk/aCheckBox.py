@@ -7,8 +7,10 @@ class aCheckBox(placement_Tool_Kit_internet, ctk.CTkCheckBox):
         if boolean_value:
             self.__bVar = BooleanVar(master, value=True)
         else:
-            self.__bVar = BooleanVar(master, value=True)
-        super().__init__(master, variable=self.__bVar, text="Arrera CheckBox", **kwargs)
+            self.__bVar = BooleanVar(master, value=False)
+
+        text_value = kwargs.pop('text', "Arrera CheckBox")
+        super().__init__(master, variable=self.__bVar, text=text_value, **kwargs)
 
     def getBooleanVar(self):
         return self.__bVar
