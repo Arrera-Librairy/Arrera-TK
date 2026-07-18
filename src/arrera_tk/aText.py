@@ -8,7 +8,7 @@ class aText(placement_Tool_Kit_internet, ctk.CTkTextbox):
 
         if center:
             self._textbox.tag_configure("center", justify="center")
-            self._textbox.tag_add("center", "0.0", "end")
+            self._textbox.tag_add("center", "1.0", "end")
 
     def disable_textbox(self):
         self.configure(state="disabled")

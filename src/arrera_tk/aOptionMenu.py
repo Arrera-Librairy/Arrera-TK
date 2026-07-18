@@ -29,7 +29,7 @@ class aOptionMenu(placement_Tool_Kit_internet, ctk.CTkOptionMenu):
         if fg != "":
             self.configure(text_color=fg)
 
-    def changePolice(self, font: (str, int, str) = ("Roboto", 15, "bold")):
+    def changePolice(self, font: tuple[str, int, str] = ("Roboto", 15, "bold")):
         self.configure(font=font)
 
     def set_text(self, text: str):

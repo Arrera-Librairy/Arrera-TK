@@ -15,8 +15,7 @@ class aTopLevel(ctk.CTkToplevel):
 
         if icon != "":
             icon = resource_path(icon)
-            if platform.system() == "Windows":
-                if os.path.splitext(icon)[1].lower() == '.ico':
-                    self.iconbitmap(icon)
+            if platform.system() == "Windows" and os.path.splitext(icon)[1].lower() == '.ico':
+                self.iconbitmap(icon)
             elif os.path.splitext(icon)[1].lower() == '.png':
                 self.iconphoto(True, PhotoImage(file=icon))

@@ -45,5 +45,5 @@ class aEntryLengend(placement_Tool_Kit_internet, ctk.CTkFrame):
     def changeTextLabel(self, text: str):
         self.__label.configure(text=text)
 
-    def changePoliceLabel(self, font: (str, int, str) = ("Roboto", 15, "bold")):
+    def changePoliceLabel(self, font: tuple[str, int, str] = ("Roboto", 15, "bold")):
         self.__label.configure(font=font)
